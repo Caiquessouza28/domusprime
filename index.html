@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Domus Prime | Automação Residencial</title>
+<title>Domus Prime</title>
 
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600&family=Inter:wght@300;400&display=swap" rel="stylesheet">
 
@@ -28,24 +28,15 @@ body {
 }
 
 .hero h1 {
-    font-family: 'Playfair Display', serif;
     font-size: 55px;
     color: #c9a85d;
 }
 
-.hero p {
-    max-width: 650px;
-    margin: 20px;
-    font-size: 18px;
-}
-
 .btn {
     background: #c9a85d;
-    padding: 15px 35px;
+    padding: 15px 30px;
     color: #000;
     text-decoration: none;
-    font-weight: bold;
-    border-radius: 5px;
 }
 
 .section {
@@ -62,13 +53,11 @@ body {
 .card {
     background: #111;
     padding: 30px;
-    border-radius: 12px;
     cursor: pointer;
     transition: 0.3s;
 }
 
 .card:hover {
-    transform: translateY(-10px);
     border: 1px solid #c9a85d;
 }
 
@@ -82,21 +71,32 @@ body {
     height:100%;
     background:#000;
     z-index:999;
-    flex-direction:column;
-    align-items:center;
     justify-content:center;
-    padding:20px;
+    align-items:center;
+    flex-direction:column;
 }
 
-#galeria img {
-    width:250px;
+#imagemGrande {
+    width:80%;
+    max-height:70vh;
+    object-fit:cover;
     border-radius:10px;
 }
 
-.footer {
-    text-align: center;
-    padding: 40px;
-    border-top: 1px solid #222;
+.navBtn {
+    margin:10px;
+    padding:10px 20px;
+    background:#c9a85d;
+    border:none;
+    cursor:pointer;
+}
+
+.closeBtn {
+    margin-top:20px;
+    background:#333;
+    color:#fff;
+    padding:10px 20px;
+    border:none;
 }
 </style>
 </head>
@@ -105,80 +105,49 @@ body {
 
 <div class="hero">
     <h1>Domus Prime</h1>
-    <p>Automação residencial de alto padrão para casas e apartamentos. Conforto, segurança e tecnologia em cada ambiente.</p>
-    <a class="btn" href="https://wa.me/5511987251715?text=Quero%20automatizar%20minha%20casa">Solicitar Projeto</a>
+    <p>Automação residencial premium</p>
+    <a class="btn" href="https://wa.me/5511987251715">Solicitar Projeto</a>
 </div>
 
 <div class="section">
-    <h2 style="color:#c9a85d;">Ambientes Inteligentes</h2>
+    <h2 style="color:#c9a85d;">Ambientes</h2>
 
     <div class="cards">
-
-        <div class="card" onclick="abrirGaleria('sala')">
-            <h3>Sala Inteligente</h3>
-            <p>Iluminação, cinema e automação completa.</p>
-        </div>
-
-        <div class="card" onclick="abrirGaleria('quarto')">
-            <h3>Quarto Automatizado</h3>
-            <p>Conforto e controle total.</p>
-        </div>
-
-        <div class="card" onclick="abrirGaleria('cozinha')">
-            <h3>Cozinha Inteligente</h3>
-            <p>Praticidade e tecnologia no dia a dia.</p>
-        </div>
-
-        <div class="card" onclick="abrirGaleria('externa')">
-            <h3>Área Externa</h3>
-            <p>Iluminação e automação para lazer.</p>
-        </div>
-
+        <div class="card" onclick="abrir('sala')">Sala Inteligente</div>
+        <div class="card" onclick="abrir('quarto')">Quarto Automatizado</div>
+        <div class="card" onclick="abrir('cozinha')">Cozinha Inteligente</div>
     </div>
 </div>
 
 <!-- POPUP -->
 <div id="popup">
+    <h2 id="titulo"></h2>
 
-    <h2 id="tituloGaleria" style="color:#c9a85d;"></h2>
+    <img id="imagemGrande">
 
-    <div id="galeria" style="display:flex; gap:15px; flex-wrap:wrap; justify-content:center; margin-top:20px;"></div>
+    <div>
+        <button class="navBtn" onclick="voltar()">←</button>
+        <button class="navBtn" onclick="avancar()">→</button>
+    </div>
 
-    <a id="botaoVenda" href="#" target="_blank"
-       style="margin-top:30px; padding:15px 30px; background:#c9a85d; color:#000; text-decoration:none; font-weight:bold; border-radius:5px;">
-       Solicitar Projeto
-    </a>
+    <a id="whats" class="btn" target="_blank">Solicitar Projeto</a>
 
-    <br><br>
-
-    <button onclick="fecharGaleria()" style="padding:10px 25px; background:#333; color:#fff; border:none;">
-        Fechar
-    </button>
-
-</div>
-
-<div class="footer">
-    <p>Domus Prime Automação Residencial</p>
-    <p>São Paulo e Interior</p>
+    <button class="closeBtn" onclick="fechar()">Fechar</button>
 </div>
 
 <script>
-function abrirGaleria(tipo){
+let imagens = [];
+let index = 0;
 
+function abrir(tipo){
     const popup = document.getElementById("popup");
-    const titulo = document.getElementById("tituloGaleria");
-    const galeria = document.getElementById("galeria");
-
-    galeria.innerHTML = "";
-
-    let imagens = [];
+    const titulo = document.getElementById("titulo");
 
     if(tipo === "sala"){
         titulo.innerText = "Sala Inteligente";
         imagens = [
             "https://images.unsplash.com/photo-1600607687939-ce8a6c25118c",
-            "https://images.unsplash.com/photo-1586023492125-27b2c045efd7",
-            "https://images.unsplash.com/photo-1615873968403-89e068629265"
+            "https://images.unsplash.com/photo-1586023492125-27b2c045efd7"
         ];
     }
 
@@ -186,7 +155,6 @@ function abrirGaleria(tipo){
         titulo.innerText = "Quarto Automatizado";
         imagens = [
             "https://images.unsplash.com/photo-1505693416388-ac5ce068fe85",
-            "https://images.unsplash.com/photo-1616594039964-ae9021a400a0",
             "https://images.unsplash.com/photo-1600210492493-0946911123ea"
         ];
     }
@@ -195,33 +163,34 @@ function abrirGaleria(tipo){
         titulo.innerText = "Cozinha Inteligente";
         imagens = [
             "https://images.unsplash.com/photo-1556911220-bff31c812dba",
-            "https://images.unsplash.com/photo-1600585152220-90363fe7e115",
-            "https://images.unsplash.com/photo-1600566753086-00f18fb6b3ea"
+            "https://images.unsplash.com/photo-1600585152220-90363fe7e115"
         ];
     }
 
-    if(tipo === "externa"){
-        titulo.innerText = "Área Externa Automatizada";
-        imagens = [
-            "https://images.unsplash.com/photo-1507089947368-19c1da9775ae",
-            "https://images.unsplash.com/photo-1505691723518-36a5ac3be353",
-            "https://images.unsplash.com/photo-1600585154340-be6161a56a0c"
-        ];
-    }
+    index = 0;
+    atualizarImagem();
 
-    imagens.forEach(src => {
-        const img = document.createElement("img");
-        img.src = src;
-        galeria.appendChild(img);
-    });
-
-    document.getElementById("botaoVenda").href =
-    "https://wa.me/5511987251715?text=Quero%20um%20projeto%20de%20automação";
+    document.getElementById("whats").href =
+    "https://wa.me/5511987251715?text=Quero%20um%20projeto";
 
     popup.style.display = "flex";
 }
 
-function fecharGaleria(){
+function atualizarImagem(){
+    document.getElementById("imagemGrande").src = imagens[index];
+}
+
+function avancar(){
+    index = (index + 1) % imagens.length;
+    atualizarImagem();
+}
+
+function voltar(){
+    index = (index - 1 + imagens.length) % imagens.length;
+    atualizarImagem();
+}
+
+function fechar(){
     document.getElementById("popup").style.display = "none";
 }
 </script>
