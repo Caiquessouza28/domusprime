@@ -4,21 +4,21 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Domus Prime</title>
+<title>Domus Prime | Automação Residencial</title>
 
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600&family=Inter:wght@300;400&display=swap" rel="stylesheet">
 
 <style>
 body {
-    margin: 0;
-    background: #0a0a0a;
-    color: #fff;
-    font-family: 'Inter', sans-serif;
+    margin:0;
+    background:#0a0a0a;
+    color:#fff;
+    font-family:'Inter', sans-serif;
 }
 
 .hero {
-    height: 100vh;
-    background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.95)),
+    height:100vh;
+    background:linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.95)),
     url('https://images.unsplash.com/photo-1600607687939-ce8a6c25118c') center/cover;
     display:flex;
     justify-content:center;
@@ -54,6 +54,7 @@ body {
     background:#111;
     padding:30px;
     cursor:pointer;
+    transition:0.3s;
 }
 
 .card:hover {
@@ -70,15 +71,9 @@ body {
     height:100%;
     background:#000;
     z-index:999;
-    justify-content:center;
-    align-items:center;
     flex-direction:column;
-}
-
-#imagem {
-    width:80%;
-    border-radius:10px;
-    margin-top:15px;
+    align-items:center;
+    justify-content:center;
 }
 
 iframe {
@@ -87,7 +82,13 @@ iframe {
     border-radius:10px;
 }
 
-/* efeito luz */
+#imagem {
+    width:80%;
+    border-radius:10px;
+    margin-top:15px;
+}
+
+/* luz */
 #overlayLuz {
     position:fixed;
     top:0;
@@ -96,11 +97,9 @@ iframe {
     height:100%;
     background:#000;
     opacity:0;
-    pointer-events:none;
-    transition:opacity 2s ease;
+    transition:opacity 2s;
     z-index:998;
 }
-
 </style>
 </head>
 
@@ -108,17 +107,35 @@ iframe {
 
 <div class="hero">
     <h1>Domus Prime</h1>
-    <p>Automação residencial premium</p>
+    <p>Automação elétrica residencial de alto padrão</p>
     <a class="btn" href="https://wa.me/5511987251715">Solicitar Projeto</a>
 </div>
 
 <div class="section">
-    <h2 style="color:#c9a85d;">Ambientes</h2>
+    <h2 style="color:#c9a85d;">Soluções Inteligentes</h2>
 
     <div class="cards">
-        <div class="card" onclick="abrir('cinema')">Experiência Cinematográfica</div>
-        <div class="card" onclick="abrir('controle')">Controle pelo Celular</div>
-        <div class="card" onclick="abrir('persiana')">Persianas Automatizadas</div>
+
+        <div class="card" onclick="abrir('cinema')">
+            <h3>Experiência Cinematográfica</h3>
+            <p>Automação completa com projetor, iluminação e som.</p>
+        </div>
+
+        <div class="card" onclick="abrir('iluminacao')">
+            <h3>Iluminação Automatizada</h3>
+            <p>Dimerização, cenários e controle inteligente.</p>
+        </div>
+
+        <div class="card" onclick="abrir('controle')">
+            <h3>Controle Central</h3>
+            <p>Tablet na parede e controle total da residência.</p>
+        </div>
+
+        <div class="card" onclick="abrir('painel')">
+            <h3>Painel de Automação</h3>
+            <p>Integração elétrica profissional e centralizada.</p>
+        </div>
+
     </div>
 </div>
 
@@ -131,7 +148,7 @@ iframe {
 
     <img id="imagem">
 
-    <p id="descricao"></p>
+    <p id="descricao" style="max-width:600px;"></p>
 
     <a id="whats" class="btn" target="_blank">Solicitar Projeto</a>
 
@@ -158,35 +175,45 @@ function abrir(tipo){
 
         setTimeout(() => {
             video.src = "https://www.youtube.com/embed/6v2L2UGZJAM?autoplay=1";
-        }, 1200);
+        }, 1000);
 
-        imagem.src = "https://images.unsplash.com/photo-1593784991095-a205069470b6";
+        imagem.src = "https://images.unsplash.com/photo-1587825140708-dfaf72ae4b04";
 
-        descricao.innerText = "Projetor embutido descendo automaticamente, iluminação cênica e controle completo por tablet na parede.";
+        descricao.innerText = "Projetor embutido, automação de iluminação, áudio e controle total via tablet.";
+    }
+
+    if(tipo === "iluminacao"){
+        titulo.innerText = "Iluminação Automatizada";
+
+        video.src = "https://www.youtube.com/embed/2WcJQ1mU9zE";
+
+        imagem.src = "https://images.unsplash.com/photo-1507089947368-19c1da9775ae";
+
+        descricao.innerText = "Controle de intensidade, cenários e integração completa com sensores.";
     }
 
     if(tipo === "controle"){
-        titulo.innerText = "Controle Inteligente";
+        titulo.innerText = "Controle Central";
 
         video.src = "https://www.youtube.com/embed/ysz5S6PUM-U";
 
         imagem.src = "https://images.unsplash.com/photo-1558002038-1055907df827";
 
-        descricao.innerText = "Controle total da sua casa através do celular ou comando de voz.";
+        descricao.innerText = "Controle total da residência por tablet fixo ou smartphone.";
     }
 
-    if(tipo === "persiana"){
-        titulo.innerText = "Persianas Automatizadas";
+    if(tipo === "painel"){
+        titulo.innerText = "Painel de Automação";
 
         video.src = "https://www.youtube.com/embed/aqz-KE-bpKQ";
 
-        imagem.src = "https://images.unsplash.com/photo-1505691723518-36a5ac3be353";
+        imagem.src = "https://images.unsplash.com/photo-1581090700227-1e37b190418e";
 
-        descricao.innerText = "Abertura e fechamento automático com integração total ao sistema.";
+        descricao.innerText = "Sistema elétrico centralizado com integração de todos os circuitos.";
     }
 
     document.getElementById("whats").href =
-    "https://wa.me/5511987251715?text=Quero%20automatizar%20minha%20casa";
+    "https://wa.me/5511987251715?text=Quero%20um%20projeto%20de%20automação";
 
     popup.style.display = "flex";
 }
