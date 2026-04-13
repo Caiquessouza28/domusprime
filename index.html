@@ -1,169 +1,71 @@
-<!DOCTYPE html>
-<html lang="pt-br">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<div class="cards">
 
-<title>Domus Prime | Automação Residencial</title>
-
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600&family=Inter:wght@300;400&display=swap" rel="stylesheet">
-
-<style>
-body {
-    margin: 0;
-    background: #0a0a0a;
-    color: #fff;
-    font-family: 'Inter', sans-serif;
-}
-
-.hero {
-    height: 100vh;
-    background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.95)),
-    url('https://images.unsplash.com/photo-1600607687939-ce8a6c25118c') center/cover;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-}
-
-.hero h1 {
-    font-family: 'Playfair Display', serif;
-    font-size: 55px;
-    color: #c9a85d;
-}
-
-.hero p {
-    max-width: 650px;
-    margin: 20px;
-    font-size: 18px;
-}
-
-.btn {
-    background: #c9a85d;
-    padding: 15px 35px;
-    color: #000;
-    text-decoration: none;
-    font-weight: bold;
-    border-radius: 5px;
-    transition: 0.3s;
-}
-
-.btn:hover {
-    background: #e5c77a;
-}
-
-.section {
-    padding: 80px 20px;
-    text-align: center;
-}
-
-.cards {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 30px;
-}
-
-.card {
-    background: #111;
-    padding: 30px;
-    border-radius: 12px;
-    transition: 0.4s;
-}
-
-.card:hover {
-    transform: translateY(-10px);
-    border: 1px solid #c9a85d;
-}
-
-.image-section {
-    height: 400px;
-    background: url('https://images.unsplash.com/photo-1600573472550-8090b5e0745e') center/cover;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.overlay {
-    background: rgba(0,0,0,0.7);
-    padding: 40px;
-    text-align: center;
-}
-
-.footer {
-    text-align: center;
-    padding: 40px;
-    border-top: 1px solid #222;
-}
-</style>
-</head>
-
-<body>
-
-<div class="hero">
-    <h1>Domus Prime</h1>
-    <p>Automação residencial de alto padrão para casas e apartamentos. Controle total de iluminação, segurança, climatização e entretenimento.</p>
-    <a class="btn" href="https://wa.me/5511987251715?text=Olá,%20quero%20um%20projeto%20de%20automação">Solicitar Projeto</a>
+<div class="card" onclick="abrirPopup('luz')">
+    <h3>Iluminação Inteligente</h3>
+    <p>Cenários personalizados que transformam ambientes.</p>
 </div>
 
-<div class="section">
-    <h2 style="color:#c9a85d;">O que é automação residencial?</h2>
-    <p>Sistemas inteligentes que permitem controlar toda a sua casa de forma integrada, através do celular, tablet ou comandos de voz, proporcionando conforto, segurança e eficiência energética.</p>
+<div class="card" onclick="abrirPopup('cinema')">
+    <h3>Home Cinema</h3>
+    <p>Experiência imersiva com automação completa.</p>
 </div>
 
-<div class="section">
-    <h2 style="color:#c9a85d;">Soluções que oferecemos</h2>
-    <div class="cards">
-        <div class="card">
-            <h3>Iluminação Inteligente</h3>
-            <p>Controle de intensidade, cenas personalizadas e automação por horário ou presença.</p>
-        </div>
-        <div class="card">
-            <h3>Cortinas Automatizadas</h3>
-            <p>Abertura e fechamento automático conforme horário ou comando de voz.</p>
-        </div>
-        <div class="card">
-            <h3>Climatização</h3>
-            <p>Controle inteligente de ar-condicionado e temperatura dos ambientes.</p>
-        </div>
-        <div class="card">
-            <h3>Segurança</h3>
-            <p>Câmeras, sensores e fechaduras digitais integradas ao sistema.</p>
-        </div>
-        <div class="card">
-            <h3>Home Theater</h3>
-            <p>Automação completa de som, TV e iluminação para experiência cinema.</p>
-        </div>
-        <div class="card">
-            <h3>Controle por Voz</h3>
-            <p>Integração com Alexa e Google Home para comandos simples e rápidos.</p>
-        </div>
-    </div>
+<div class="card" onclick="abrirPopup('seguranca')">
+    <h3>Segurança</h3>
+    <p>Proteção inteligente integrada à sua rotina.</p>
 </div>
 
-<div class="image-section">
-    <div class="overlay">
-        <h2 style="color:#c9a85d;">Integração total da sua residência</h2>
-        <p>Projetos personalizados para cada cliente</p>
-    </div>
+<div class="card" onclick="abrirPopup('controle')">
+    <h3>Controle Total</h3>
+    <p>Gerencie tudo pelo celular ou voz.</p>
 </div>
 
-<div class="section">
-    <h2 style="color:#c9a85d;">Como funciona o projeto</h2>
-    <p>1. Levantamento técnico do imóvel</p>
-    <p>2. Desenvolvimento do projeto personalizado</p>
-    <p>3. Instalação e configuração</p>
-    <p>4. Entrega e suporte técnico</p>
 </div>
 
-<div class="section">
-    <a class="btn" href="https://wa.me/5511987251715?text=Quero%20um%20projeto%20premium">Falar no WhatsApp</a>
+<!-- POPUP -->
+<div id="popup" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.95); justify-content:center; align-items:center; flex-direction:column; z-index:999;">
+    
+    <h2 id="tituloPopup" style="color:#c9a85d;"></h2>
+    
+    <img id="imgPopup" style="max-width:90%; max-height:70%; border-radius:10px; margin:20px 0;">
+    
+    <button onclick="fecharPopup()" style="padding:10px 25px; background:#c9a85d; border:none; cursor:pointer;">
+        Fechar
+    </button>
+
 </div>
 
-<div class="footer">
-    <p>Domus Prime Automação Residencial</p>
-    <p>São Paulo e Interior</p>
-</div>
+<script>
+function abrirPopup(tipo) {
 
-</body>
-</html>
+    const popup = document.getElementById("popup");
+    const img = document.getElementById("imgPopup");
+    const titulo = document.getElementById("tituloPopup");
+
+    if(tipo === "luz"){
+        img.src = "https://images.unsplash.com/photo-1507089947368-19c1da9775ae";
+        titulo.innerText = "Iluminação Inteligente";
+    }
+
+    if(tipo === "cinema"){
+        img.src = "https://images.unsplash.com/photo-1587825140708-dfaf72ae4b04";
+        titulo.innerText = "Home Cinema";
+    }
+
+    if(tipo === "seguranca"){
+        img.src = "https://images.unsplash.com/photo-1581090700227-1e37b190418e";
+        titulo.innerText = "Segurança Residencial";
+    }
+
+    if(tipo === "controle"){
+        img.src = "https://images.unsplash.com/photo-1558002038-1055907df827";
+        titulo.innerText = "Controle Inteligente";
+    }
+
+    popup.style.display = "flex";
+}
+
+function fecharPopup(){
+    document.getElementById("popup").style.display = "none";
+}
+</script>
