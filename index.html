@@ -20,45 +20,44 @@ body {
     height: 100vh;
     background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.95)),
     url('https://images.unsplash.com/photo-1600607687939-ce8a6c25118c') center/cover;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    flex-direction:column;
+    text-align:center;
 }
 
 .hero h1 {
-    font-size: 55px;
-    color: #c9a85d;
+    font-size:55px;
+    color:#c9a85d;
 }
 
 .btn {
-    background: #c9a85d;
-    padding: 15px 30px;
-    color: #000;
-    text-decoration: none;
+    background:#c9a85d;
+    padding:15px 30px;
+    color:#000;
+    text-decoration:none;
 }
 
 .section {
-    padding: 80px 20px;
-    text-align: center;
+    padding:80px 20px;
+    text-align:center;
 }
 
 .cards {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 30px;
+    display:grid;
+    grid-template-columns:repeat(auto-fit, minmax(250px,1fr));
+    gap:30px;
 }
 
 .card {
-    background: #111;
-    padding: 30px;
-    cursor: pointer;
-    transition: 0.3s;
+    background:#111;
+    padding:30px;
+    cursor:pointer;
 }
 
 .card:hover {
-    border: 1px solid #c9a85d;
+    border:1px solid #c9a85d;
 }
 
 /* POPUP */
@@ -76,28 +75,32 @@ body {
     flex-direction:column;
 }
 
-#imagemGrande {
+#imagem {
     width:80%;
-    max-height:70vh;
-    object-fit:cover;
+    border-radius:10px;
+    margin-top:15px;
+}
+
+iframe {
+    width:80%;
+    height:300px;
     border-radius:10px;
 }
 
-.navBtn {
-    margin:10px;
-    padding:10px 20px;
-    background:#c9a85d;
-    border:none;
-    cursor:pointer;
+/* efeito luz */
+#overlayLuz {
+    position:fixed;
+    top:0;
+    left:0;
+    width:100%;
+    height:100%;
+    background:#000;
+    opacity:0;
+    pointer-events:none;
+    transition:opacity 2s ease;
+    z-index:998;
 }
 
-.closeBtn {
-    margin-top:20px;
-    background:#333;
-    color:#fff;
-    padding:10px 20px;
-    border:none;
-}
 </style>
 </head>
 
@@ -113,85 +116,85 @@ body {
     <h2 style="color:#c9a85d;">Ambientes</h2>
 
     <div class="cards">
-        <div class="card" onclick="abrir('sala')">Sala Inteligente</div>
-        <div class="card" onclick="abrir('quarto')">Quarto Automatizado</div>
-        <div class="card" onclick="abrir('cozinha')">Cozinha Inteligente</div>
+        <div class="card" onclick="abrir('cinema')">Experiência Cinematográfica</div>
+        <div class="card" onclick="abrir('controle')">Controle pelo Celular</div>
+        <div class="card" onclick="abrir('persiana')">Persianas Automatizadas</div>
     </div>
 </div>
 
 <!-- POPUP -->
 <div id="popup">
+
     <h2 id="titulo"></h2>
 
-    <img id="imagemGrande">
+    <iframe id="video" frameborder="0" allowfullscreen></iframe>
 
-    <div>
-        <button class="navBtn" onclick="voltar()">←</button>
-        <button class="navBtn" onclick="avancar()">→</button>
-    </div>
+    <img id="imagem">
+
+    <p id="descricao"></p>
 
     <a id="whats" class="btn" target="_blank">Solicitar Projeto</a>
 
-    <button class="closeBtn" onclick="fechar()">Fechar</button>
+    <button onclick="fechar()" style="margin-top:20px;">Fechar</button>
+
 </div>
 
-<script>
-let imagens = [];
-let index = 0;
+<div id="overlayLuz"></div>
 
+<script>
 function abrir(tipo){
+
     const popup = document.getElementById("popup");
     const titulo = document.getElementById("titulo");
+    const video = document.getElementById("video");
+    const imagem = document.getElementById("imagem");
+    const descricao = document.getElementById("descricao");
+    const overlay = document.getElementById("overlayLuz");
 
-    if(tipo === "sala"){
-        titulo.innerText = "Sala Inteligente";
-        imagens = [
-            "https://images.unsplash.com/photo-1600607687939-ce8a6c25118c",
-            "https://images.unsplash.com/photo-1586023492125-27b2c045efd7"
-        ];
+    if(tipo === "cinema"){
+        titulo.innerText = "Experiência Cinematográfica";
+
+        overlay.style.opacity = "0.8";
+
+        setTimeout(() => {
+            video.src = "https://www.youtube.com/embed/6v2L2UGZJAM?autoplay=1";
+        }, 1200);
+
+        imagem.src = "https://images.unsplash.com/photo-1593784991095-a205069470b6";
+
+        descricao.innerText = "Projetor embutido descendo automaticamente, iluminação cênica e controle completo por tablet na parede.";
     }
 
-    if(tipo === "quarto"){
-        titulo.innerText = "Quarto Automatizado";
-        imagens = [
-            "https://images.unsplash.com/photo-1505693416388-ac5ce068fe85",
-            "https://images.unsplash.com/photo-1600210492493-0946911123ea"
-        ];
+    if(tipo === "controle"){
+        titulo.innerText = "Controle Inteligente";
+
+        video.src = "https://www.youtube.com/embed/ysz5S6PUM-U";
+
+        imagem.src = "https://images.unsplash.com/photo-1558002038-1055907df827";
+
+        descricao.innerText = "Controle total da sua casa através do celular ou comando de voz.";
     }
 
-    if(tipo === "cozinha"){
-        titulo.innerText = "Cozinha Inteligente";
-        imagens = [
-            "https://images.unsplash.com/photo-1556911220-bff31c812dba",
-            "https://images.unsplash.com/photo-1600585152220-90363fe7e115"
-        ];
-    }
+    if(tipo === "persiana"){
+        titulo.innerText = "Persianas Automatizadas";
 
-    index = 0;
-    atualizarImagem();
+        video.src = "https://www.youtube.com/embed/aqz-KE-bpKQ";
+
+        imagem.src = "https://images.unsplash.com/photo-1505691723518-36a5ac3be353";
+
+        descricao.innerText = "Abertura e fechamento automático com integração total ao sistema.";
+    }
 
     document.getElementById("whats").href =
-    "https://wa.me/5511987251715?text=Quero%20um%20projeto";
+    "https://wa.me/5511987251715?text=Quero%20automatizar%20minha%20casa";
 
     popup.style.display = "flex";
 }
 
-function atualizarImagem(){
-    document.getElementById("imagemGrande").src = imagens[index];
-}
-
-function avancar(){
-    index = (index + 1) % imagens.length;
-    atualizarImagem();
-}
-
-function voltar(){
-    index = (index - 1 + imagens.length) % imagens.length;
-    atualizarImagem();
-}
-
 function fechar(){
     document.getElementById("popup").style.display = "none";
+    document.getElementById("video").src = "";
+    document.getElementById("overlayLuz").style.opacity = "0";
 }
 </script>
 
