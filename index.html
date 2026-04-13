@@ -3,232 +3,262 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>DOMUS PRIME | Luxury Smart Home</title>
+
+<title>Domus Prime | Automação Residencial</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600&family=Inter:wght@300;400&display=swap" rel="stylesheet">
 
 <style>
 body {
-  margin:0;
-  font-family: Arial;
-  background:#050505;
-  color:#d6b25e;
+    margin:0;
+    background:#0a0a0a;
+    color:#fff;
+    font-family:'Inter', sans-serif;
 }
 
-/* HEADER LUXO */
-header {
-  padding:70px 20px;
-  text-align:center;
-  background:#000;
-  border-bottom:1px solid #d6b25e33;
+.hero {
+    height:100vh;
+    background:linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.95)),
+    url('https://images.unsplash.com/photo-1600607687939-ce8a6c25118c') center/cover;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    flex-direction:column;
+    text-align:center;
+    padding:20px;
 }
 
-h1 {
-  font-size:42px;
-  letter-spacing:4px;
+.hero h1 {
+    font-size:50px;
+    color:#c9a85d;
 }
 
-.gold {
-  color:#d6b25e;
-  text-shadow:0 0 10px #d6b25e55;
+.hero p {
+    max-width:700px;
+    margin-top:15px;
 }
 
-p {
-  color:#c9a24a;
-}
-
-/* MAPA CASA */
-.map {
-  width:340px;
-  height:430px;
-  margin:40px auto;
-  display:grid;
-  grid-template-areas:
-    "sala quarto"
-    "cozinha cozinha"
-    "cinema cinema";
-  gap:12px;
-}
-
-/* CÔMODOS */
-.room {
-  background:#0d0d0d;
-  border:1px solid #2a2a2a;
-  border-radius:14px;
-  padding:15px;
-  cursor:pointer;
-  position:relative;
-  transition:0.3s;
-}
-
-/* GOLD ACTIVE */
-.room.active {
-  background:#111;
-  border:1px solid #d6b25e;
-  box-shadow:0 0 18px #d6b25e55;
-}
-
-/* LUZ */
-.light {
-  width:10px;
-  height:10px;
-  border-radius:50%;
-  background:#333;
-  position:absolute;
-  top:10px;
-  right:10px;
-}
-
-.room.active .light {
-  background:#d6b25e;
-  box-shadow:0 0 10px #d6b25e;
-}
-
-/* POSIÇÃO */
-#sala { grid-area:sala; }
-#quarto { grid-area:quarto; }
-#cozinha { grid-area:cozinha; }
-#cinema { grid-area:cinema; }
-
-/* BOTÃO GOLD */
 .btn {
-  background:linear-gradient(90deg,#d6b25e,#b8923f);
-  color:#000;
-  padding:12px 18px;
-  border:none;
-  border-radius:10px;
-  cursor:pointer;
-  font-weight:bold;
-  margin-top:20px;
-  transition:0.3s;
+    background:#c9a85d;
+    padding:15px 30px;
+    color:#000;
+    text-decoration:none;
+    margin-top:20px;
+    font-weight:bold;
 }
 
-.btn:hover {
-  transform:scale(1.05);
-  box-shadow:0 0 15px #d6b25e55;
+.section {
+    padding:70px 20px;
+    text-align:center;
 }
 
-/* PAINEL */
-.panel {
-  text-align:center;
-  margin-top:20px;
+.cards {
+    display:grid;
+    grid-template-columns:repeat(auto-fit, minmax(250px,1fr));
+    gap:25px;
+    margin-top:30px;
 }
 
-#valor {
-  font-size:22px;
-  color:#d6b25e;
-  font-weight:bold;
+.card {
+    background:#111;
+    padding:25px;
+    cursor:pointer;
+    transition:0.3s;
 }
 
-/* DIVISOR */
-hr {
-  border:0;
-  height:1px;
-  background:#d6b25e33;
-  margin:30px auto;
-  width:60%;
+.card:hover {
+    border:1px solid #c9a85d;
+}
+
+/* popup */
+#popup {
+    display:none;
+    position:fixed;
+    top:0;
+    left:0;
+    width:100%;
+    height:100%;
+    background:#000;
+    z-index:999;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    padding:20px;
+}
+
+iframe {
+    width:80%;
+    height:300px;
+    border-radius:10px;
+}
+
+#imagem {
+    width:80%;
+    border-radius:10px;
+    margin-top:15px;
+}
+
+#overlayLuz {
+    position:fixed;
+    top:0;
+    left:0;
+    width:100%;
+    height:100%;
+    background:#000;
+    opacity:0;
+    transition:opacity 2s;
+    z-index:998;
 }
 </style>
 </head>
 
 <body>
 
-<!-- HEADER -->
-<header>
-<h1 class="gold">DOMUS PRIME</h1>
-<p>Luxury Smart Home Automation System</p>
-</header>
+<!-- HERO -->
+<div class="hero">
+    <h1>Domus Prime</h1>
+    <p>
+    Automação elétrica inteligente para casas de alto padrão.  
+    Controle total de iluminação, cinema, climatização e segurança.
+    </p>
 
-<hr>
+    <p style="color:#c9a85d;">Atendimento limitado para São Paulo e região</p>
 
-<!-- MAPA -->
-<div class="map">
-
-<div class="room" id="sala" onclick="toggle('sala')">
-<div class="light"></div>
-<h3>Sala</h3>
+    <a class="btn" href="https://wa.me/5511987251715?text=Quero%20automatizar%20minha%20casa">
+        Falar com especialista
+    </a>
 </div>
 
-<div class="room" id="quarto" onclick="toggle('quarto')">
-<div class="light"></div>
-<h3>Quarto</h3>
+<!-- DIFERENCIAL -->
+<div class="section">
+    <h2 style="color:#c9a85d;">Integração Elétrica Profissional</h2>
+    <p>
+    Projetos com painéis de automação, circuitos dedicados e integração completa 
+    entre iluminação, climatização e sistemas inteligentes.
+    </p>
 </div>
 
-<div class="room" id="cozinha" onclick="toggle('cozinha')">
-<div class="light"></div>
-<h3>Cozinha</h3>
+<!-- AMBIENTES -->
+<div class="section">
+    <h2 style="color:#c9a85d;">Soluções Inteligentes</h2>
+
+    <div class="cards">
+
+        <div class="card" onclick="abrir('cinema')">
+            <h3>Experiência Cinematográfica</h3>
+            <p>Projetor automático, iluminação e som integrados</p>
+        </div>
+
+        <div class="card" onclick="abrir('iluminacao')">
+            <h3>Iluminação Inteligente</h3>
+            <p>Cenários, dimerização e automação completa</p>
+        </div>
+
+        <div class="card" onclick="abrir('controle')">
+            <h3>Controle Central</h3>
+            <p>Tablet na parede e controle total da casa</p>
+        </div>
+
+        <div class="card" onclick="abrir('painel')">
+            <h3>Painel de Automação</h3>
+            <p>Integração elétrica profissional</p>
+        </div>
+
+    </div>
 </div>
 
-<div class="room" id="cinema" onclick="toggle('cinema')">
-<div class="light"></div>
-<h3>Cinema</h3>
+<!-- PROVA -->
+<div class="section">
+    <h2 style="color:#c9a85d;">Projetos Realizados</h2>
+    <p>Ambientes automatizados em residências de alto padrão em São Paulo</p>
 </div>
 
+<!-- CTA FINAL -->
+<div class="section">
+    <h2>Solicite seu projeto personalizado</h2>
+    <a class="btn" href="https://wa.me/5511987251715?text=Quero%20um%20projeto%20de%20automação">
+        Quero automatizar minha casa
+    </a>
 </div>
 
-<!-- PAINEL -->
-<div class="panel">
+<!-- POPUP -->
+<div id="popup">
 
-<h3>💰 Projeto estimado</h3>
-<p id="valor">R$ 2.500</p>
+    <h2 id="titulo"></h2>
 
-<button class="btn" onclick="whats()">Solicitar instalação</button>
+    <iframe id="video"></iframe>
+
+    <img id="imagem">
+
+    <p id="descricao"></p>
+
+    <p style="color:#c9a85d;">Projeto personalizado para seu imóvel</p>
+
+    <a id="whats" class="btn" target="_blank">
+        Falar com especialista
+    </a>
+
+    <button onclick="fechar()" style="margin-top:20px;">Fechar</button>
 
 </div>
 
-<hr>
+<div id="overlayLuz"></div>
 
 <script>
+function abrir(tipo){
 
-let state = {
-  sala:false,
-  quarto:false,
-  cozinha:false,
-  cinema:false
-};
+    const titulo = document.getElementById("titulo");
+    const video = document.getElementById("video");
+    const imagem = document.getElementById("imagem");
+    const descricao = document.getElementById("descricao");
+    const overlay = document.getElementById("overlayLuz");
 
-function toggle(room){
-  state[room] = !state[room];
+    if(tipo === "cinema"){
+        titulo.innerText = "Experiência Cinematográfica";
 
-  const el = document.getElementById(room);
+        overlay.style.opacity = "0.8";
 
-  if(state[room]){
-    el.classList.add("active");
-  } else {
-    el.classList.remove("active");
-  }
+        setTimeout(() => {
+            video.src = "https://www.youtube.com/embed/6v2L2UGZJAM?autoplay=1";
+        }, 1000);
 
-  calc();
+        imagem.src = "https://images.unsplash.com/photo-1587825140708-dfaf72ae4b04";
+
+        descricao.innerText = "Projetor embutido, iluminação automatizada e controle via tablet.";
+    }
+
+    if(tipo === "iluminacao"){
+        titulo.innerText = "Iluminação Inteligente";
+        video.src = "https://www.youtube.com/embed/2WcJQ1mU9zE";
+        imagem.src = "https://images.unsplash.com/photo-1507089947368-19c1da9775ae";
+        descricao.innerText = "Controle de luz, cenários e integração com sensores.";
+    }
+
+    if(tipo === "controle"){
+        titulo.innerText = "Controle Central";
+        video.src = "https://www.youtube.com/embed/ysz5S6PUM-U";
+        imagem.src = "https://images.unsplash.com/photo-1558002038-1055907df827";
+        descricao.innerText = "Controle completo via tablet ou celular.";
+    }
+
+    if(tipo === "painel"){
+        titulo.innerText = "Painel de Automação";
+        video.src = "https://www.youtube.com/embed/aqz-KE-bpKQ";
+        imagem.src = "https://images.unsplash.com/photo-1581090700227-1e37b190418e";
+        descricao.innerText = "Sistema elétrico centralizado e profissional.";
+    }
+
+    document.getElementById("whats").href =
+    "https://wa.me/5511987251715?text=Quero%20automatizar%20minha%20casa";
+
+    document.getElementById("popup").style.display = "flex";
 }
 
-function calc(){
-  let base = 2500;
-
-  if(state.sala) base += 1200;
-  if(state.quarto) base += 900;
-  if(state.cozinha) base += 1000;
-  if(state.cinema) base += 4000;
-
-  document.getElementById("valor").innerText = "R$ " + base;
+function fechar(){
+    document.getElementById("popup").style.display = "none";
+    document.getElementById("video").src = "";
+    document.getElementById("overlayLuz").style.opacity = "0";
 }
-
-function whats(){
-  const numero = "SEU_NUMERO";
-
-  const msg =
-`DOMUS PRIME - Luxury Edition
-
-Configuração:
-- Sala: ${state.sala}
-- Quarto: ${state.quarto}
-- Cozinha: ${state.cozinha}
-- Cinema: ${state.cinema}
-
-Valor estimado: ${document.getElementById("valor").innerText}
-
-Quero esse projeto premium instalado.`;
-
-  window.open(`https://wa.me/${numero}?text=${encodeURIComponent(msg)}`, "_blank");
-}
-
 </script>
 
 </body>
