@@ -3,22 +3,22 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Casa Inteligente 4.0</title>
+<title>Casa Inteligente Premium</title>
 
 <style>
 body {
   margin:0;
   font-family: Arial;
-  background:#000;
+  background:#0f0f0f;
   color:white;
 }
 
-/* HEADER */
 header {
-  padding:80px 20px;
-  text-align:center;
   background:url('https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?auto=format&fit=crop&w=1600&q=80');
   background-size:cover;
+  background-position:center;
+  padding:110px 20px;
+  text-align:center;
   position:relative;
 }
 
@@ -26,70 +26,82 @@ header::after {
   content:"";
   position:absolute;
   inset:0;
-  background:rgba(0,0,0,0.7);
+  background:rgba(0,0,0,0.65);
 }
 
-header h1, header p {
+header h1, header p, header button {
   position:relative;
   z-index:1;
 }
 
 h1 { font-size:42px; }
 
-/* BOTÕES TOPO */
-.menu {
-  display:flex;
-  justify-content:center;
-  flex-wrap:wrap;
-  gap:10px;
-  padding:20px;
-  background:#111;
-}
-
-.menu button {
-  padding:12px 18px;
-  border:none;
-  border-radius:10px;
-  cursor:pointer;
-  background:#1f1f1f;
-  color:white;
-  transition:0.3s;
-}
-
-.menu button:hover {
+.btn {
   background:#00c853;
+  padding:14px 22px;
+  color:white;
+  border:none;
+  font-size:16px;
+  cursor:pointer;
+  border-radius:8px;
+  margin-top:10px;
 }
 
-/* SEÇÕES */
+.btn:hover {
+  transform:scale(1.05);
+}
+
 section {
-  display:none;
-  padding:40px 20px;
+  padding:50px 20px;
   text-align:center;
 }
 
-.active {
-  display:block;
+.grid {
+  display:flex;
+  flex-wrap:wrap;
+  justify-content:center;
+  gap:20px;
 }
 
-/* CARDS */
 .card {
-  background:#1a1a1a;
+  background:#1c1c1c;
   padding:20px;
-  margin:10px;
-  border-radius:15px;
-  display:inline-block;
-  width:260px;
+  border-radius:12px;
+  width:280px;
 }
 
-/* BOTÃO */
-.btn {
-  background:linear-gradient(90deg,#00c853,#00e676);
-  padding:12px 18px;
-  border:none;
-  color:white;
+img {
+  width:100%;
+  height:180px;
+  object-fit:cover;
   border-radius:10px;
-  cursor:pointer;
-  margin-top:10px;
+}
+
+iframe {
+  width:90%;
+  max-width:600px;
+  height:315px;
+  border-radius:10px;
+  margin-top:15px;
+}
+
+/* SIMULADOR */
+.sim {
+  background:#141414;
+  padding:20px;
+  border-radius:12px;
+  width:240px;
+  margin:10px;
+  display:inline-block;
+}
+
+/* FOOTER */
+footer {
+  text-align:center;
+  padding:30px;
+  background:#000;
+  color:#777;
+  font-size:14px;
 }
 </style>
 </head>
@@ -97,155 +109,113 @@ section {
 <body>
 
 <header>
-<h1>Casa Inteligente 4.0</h1>
-<p>Controle por ambientes + automação completa</p>
+<h1>Casa Inteligente Premium</h1>
+<p>Automação residencial moderna para conforto, segurança e tecnologia</p>
+
+<button class="btn" onclick="orcamento()">
+Solicitar Orçamento
+</button>
 </header>
 
-<!-- MENU AMBIENTES -->
-<div class="menu">
-<button onclick="abrir('sala')">🏠 Sala</button>
-<button onclick="abrir('quarto')">🛏️ Quarto</button>
-<button onclick="abrir('cozinha')">🍽️ Cozinha</button>
-<button onclick="abrir('cinema')">🎬 Cinema</button>
-<button onclick="abrir('geral')">⚙️ Geral</button>
-</div>
+<!-- SERVIÇOS -->
+<section>
+<h2>🔥 O que instalamos</h2>
 
-<!-- SALA -->
-<section id="sala" class="active">
-<h2>🏠 Sala Inteligente</h2>
+<div class="grid">
 
 <div class="card">
-<h3>💡 Luz da Sala</h3>
-<p id="luzSala">OFF</p>
-<button class="btn" onclick="toggle('luzSala')">Alternar</button>
+<img src="https://images.unsplash.com/photo-1507089947368-19c1da9775ae?auto=format&fit=crop&w=800&q=80">
+<h3>💡 Iluminação Inteligente</h3>
+<p>Cenas automáticas para cada ambiente</p>
 </div>
 
 <div class="card">
-<h3>🔊 Som Ambiente</h3>
-<p id="somSala">OFF</p>
-<button class="btn" onclick="toggle('somSala')">Alternar</button>
+<img src="https://images.unsplash.com/photo-1586023492125-27b2c045efd7?auto=format&fit=crop&w=800&q=80">
+<h3>🎬 Modo Cinema</h3>
+<p>Ambiente automático com luz e som</p>
+</div>
+
+<div class="card">
+<img src="https://images.unsplash.com/photo-1558002038-1055907df827?auto=format&fit=crop&w=800&q=80">
+<h3>🏠 Casa Inteligente</h3>
+<p>Controle total pelo celular</p>
+</div>
+
 </div>
 </section>
 
-<!-- QUARTO -->
-<section id="quarto">
-<h2>🛏️ Quarto Inteligente</h2>
+<!-- VÍDEOS -->
+<section>
+<h2>🎥 Veja na prática</h2>
 
-<div class="card">
-<h3>💡 Luz suave</h3>
-<p id="luzQuarto">OFF</p>
-<button class="btn" onclick="toggle('luzQuarto')">Alternar</button>
+<iframe src="https://www.youtube.com/embed/1Q8fG0TtVAY" allowfullscreen></iframe>
+<iframe src="https://www.youtube.com/embed/3v5G7G1xk8Q" allowfullscreen></iframe>
+</section>
+
+<!-- SIMULADOR SIMPLES -->
+<section>
+<h2>🏠 Simule sua casa inteligente</h2>
+
+<div class="sim">
+<h3>💡 Luzes</h3>
+<p id="luz">OFF</p>
+<button class="btn" onclick="toggle()">Alternar</button>
 </div>
 
-<div class="card">
-<h3>❄️ Climatização</h3>
-<p id="climaQuarto">24°C</p>
-<button class="btn" onclick="temp()">Diminuir</button>
+<div class="sim">
+<h3>🎬 Cinema</h3>
+<p id="cinema">OFF</p>
+<button class="btn" onclick="cinema()">Ativar</button>
+</div>
+
+<div class="sim">
+<h3>❄️ Clima</h3>
+<p id="temp">24°C</p>
+<button class="btn" onclick="temp()">Ajustar</button>
 </div>
 </section>
 
-<!-- COZINHA -->
-<section id="cozinha">
-<h2>🍽️ Cozinha Inteligente</h2>
+<!-- CONTATO -->
+<section>
+<h2>📞 Fale com a gente</h2>
+<p>Projetos sob medida para sua residência</p>
 
-<div class="card">
-<h3>💡 Iluminação forte</h3>
-<p id="luzCozinha">OFF</p>
-<button class="btn" onclick="toggle('luzCozinha')">Alternar</button>
-</div>
-
-<div class="card">
-<h3>🔔 Alertas</h3>
-<p id="alerta">OFF</p>
-<button class="btn" onclick="toggle('alerta')">Ativar</button>
-</div>
-</section>
-
-<!-- CINEMA -->
-<section id="cinema">
-<h2>🎬 Modo Cinema</h2>
-
-<div class="card">
-<h3>💡 Luzes automáticas</h3>
-<p id="cinemaLuz">OFF</p>
-<button class="btn" onclick="toggle('cinemaLuz')">Ativar</button>
-</div>
-
-<div class="card">
-<h3>🔊 Som Dolby</h3>
-<p id="cinemaSom">OFF</p>
-<button class="btn" onclick="toggle('cinemaSom')">Ativar</button>
-</div>
-</section>
-
-<!-- GERAL -->
-<section id="geral">
-<h2>⚙️ Controle Geral</h2>
-
-<div class="card">
-<h3>💰 Orçamento automático</h3>
-<p id="valor">R$ 0</p>
-<button class="btn" onclick="calcular()">Atualizar</button>
-</div>
-
-<br>
-
-<button class="btn" onclick="whats()">
-📲 Enviar projeto no WhatsApp
+<button class="btn" onclick="orcamento()">
+Quero automatizar minha casa
 </button>
 </section>
 
+<footer>
+Casa Inteligente Premium © 2026 — Automação Residencial
+</footer>
+
 <script>
+let luz = false;
+let cinemaAtivo = false;
+let temp = 24;
 
-let estado = {};
-
-function abrir(secao){
-  document.querySelectorAll("section").forEach(s => s.classList.remove("active"));
-  document.getElementById(secao).classList.add("active");
+function toggle(){
+  luz = !luz;
+  document.getElementById("luz").innerText = luz ? "ON 💡" : "OFF";
 }
 
-function toggle(id){
-  estado[id] = !estado[id];
-  document.getElementById(id).innerText = estado[id] ? "ON" : "OFF";
-  calcular();
+function cinema(){
+  cinemaAtivo = true;
+  luz = false;
+  document.getElementById("cinema").innerText = "ON 🎬";
+  document.getElementById("luz").innerText = "Cinema ativo";
 }
 
 function temp(){
-  let el = document.getElementById("climaQuarto");
-  let val = parseInt(el.innerText);
-  val--;
-  el.innerText = val + "°C";
+  temp--;
+  document.getElementById("temp").innerText = temp + "°C";
 }
 
-function calcular(){
-  let base = 2000;
-
-  for(let k in estado){
-    if(estado[k]) base += 800;
-  }
-
-  document.getElementById("valor").innerText = "R$ " + base;
-}
-
-function whats(){
+function orcamento(){
   const numero = "SEU_NUMERO";
-
-  const msg =
-`Projeto de Casa Inteligente 4.0:
-
-Ambientes configurados:
-- Sala
-- Quarto
-- Cozinha
-- Cinema
-
-Valor estimado: ${document.getElementById("valor").innerText}
-
-Quero instalar esse sistema.`;
-
+  const msg = "Olá! Quero um orçamento de automação residencial da Casa Inteligente Premium.";
   window.open(`https://wa.me/${numero}?text=${encodeURIComponent(msg)}`, "_blank");
 }
-
 </script>
 
 </body>
