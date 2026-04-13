@@ -50,6 +50,8 @@ body {
     font-weight:bold;
     border-radius:8px;
     transition:0.3s;
+    cursor:pointer;
+    border:none;
 }
 
 .btn:hover {
@@ -83,7 +85,7 @@ body {
     transform:translateY(-5px);
 }
 
-/* 🏠 NOVO: MINI MAPA */
+/* MAPA CASA */
 .mapa {
     display:grid;
     grid-template-columns:repeat(2, 1fr);
@@ -172,103 +174,99 @@ iframe {
     Controle total de iluminação, cinema, climatização e segurança.
     </p>
 
-    <p style="color:#c9a85d;">Atendimento exclusivo para projetos personalizados</p>
-
-    <a class="btn" href="https://wa.me/5511987251715?text=Quero%20um%20projeto%20Domus%20Prime">
-        Falar com especialista
-    </a>
+    <button class="btn" onclick="scrollToMap()">Falar com especialista</button>
 </div>
 
-<!-- 🏠 NOVO MAPA -->
-<div class="section">
-    <h2 style="color:#c9a85d;">Simule sua casa inteligente</h2>
+<!-- MAPA -->
+<div class="section" id="mapa">
 
-    <div class="mapa">
+<h2 style="color:#c9a85d;">Simule sua casa inteligente</h2>
 
-        <div class="casa" onclick="ativarCasa(this)">
-            Sala
-            <div class="luz"></div>
-        </div>
+<div class="mapa">
 
-        <div class="casa" onclick="ativarCasa(this)">
-            Quarto
-            <div class="luz"></div>
-        </div>
+<div class="casa" onclick="toggle('sala')">
+Sala
+<div class="luz"></div>
+</div>
 
-        <div class="casa" onclick="ativarCasa(this)">
-            Cozinha
-            <div class="luz"></div>
-        </div>
+<div class="casa" onclick="toggle('quarto')">
+Quarto
+<div class="luz"></div>
+</div>
 
-        <div class="casa" onclick="ativarCasa(this)">
-            Cinema
-            <div class="luz"></div>
-        </div>
+<div class="casa" onclick="toggle('cozinha')">
+Cozinha
+<div class="luz"></div>
+</div>
 
-    </div>
+<div class="casa" onclick="toggle('cinema')">
+Cinema
+<div class="luz"></div>
+</div>
+
+</div>
+
 </div>
 
 <!-- DIFERENCIAL -->
 <div class="section">
-    <h2 style="color:#c9a85d;">Integração Elétrica Profissional</h2>
-    <p>
-    Projetos com automação completa, iluminação inteligente e painéis de controle centralizados.
-    </p>
+<h2 style="color:#c9a85d;">Integração Elétrica Profissional</h2>
+<p>
+Projetos completos de automação residencial, iluminação e controle central.
+</p>
 </div>
 
-<!-- AMBIENTES -->
+<!-- SOLUÇÕES -->
 <div class="section">
-    <h2 style="color:#c9a85d;">Soluções Inteligentes</h2>
+<h2 style="color:#c9a85d;">Soluções Inteligentes</h2>
 
-    <div class="cards">
+<div class="cards">
 
-        <div class="card" onclick="abrir('cinema')">
-            <h3>Experiência Cinematográfica</h3>
-            <p>Iluminação + som + projeção automática</p>
-        </div>
+<div class="card" onclick="abrir('cinema')">
+<h3>Experiência Cinematográfica</h3>
+<p>Automação completa de cinema</p>
+</div>
 
-        <div class="card" onclick="abrir('iluminacao')">
-            <h3>Iluminação Inteligente</h3>
-            <p>Cenários e automação completa</p>
-        </div>
+<div class="card" onclick="abrir('iluminacao')">
+<h3>Iluminação Inteligente</h3>
+<p>Cenários automáticos</p>
+</div>
 
-        <div class="card" onclick="abrir('controle')">
-            <h3>Controle Central</h3>
-            <p>Casa inteira no celular</p>
-        </div>
+<div class="card" onclick="abrir('controle')">
+<h3>Controle Central</h3>
+<p>Tudo no celular</p>
+</div>
 
-        <div class="card" onclick="abrir('painel')">
-            <h3>Painel de Automação</h3>
-            <p>Integração elétrica profissional</p>
-        </div>
+<div class="card" onclick="abrir('painel')">
+<h3>Painel de Automação</h3>
+<p>Infraestrutura elétrica</p>
+</div>
 
-    </div>
+</div>
 </div>
 
 <!-- CTA -->
 <div class="section">
-    <h2>Projeto sob medida para sua casa</h2>
-    <a class="btn" href="https://wa.me/5511987251715?text=Quero%20consultoria%20Domus%20Prime">
-        Solicitar consultoria
-    </a>
+<h2>Projeto sob medida para sua casa</h2>
+<button class="btn" onclick="whats()">
+Solicitar consultoria
+</button>
 </div>
 
 <!-- POPUP -->
 <div id="popup">
 
-    <h2 id="titulo"></h2>
+<h2 id="titulo"></h2>
 
-    <iframe id="video"></iframe>
+<iframe id="video"></iframe>
 
-    <img id="imagem">
+<img id="imagem">
 
-    <p id="descricao"></p>
+<p id="descricao"></p>
 
-    <a class="btn" href="https://wa.me/5511987251715" target="_blank">
-        Falar com especialista
-    </a>
+<button class="btn" onclick="whats()">Falar com especialista</button>
 
-    <button onclick="fechar()" style="margin-top:20px;">Fechar</button>
+<button onclick="fechar()" style="margin-top:20px;">Fechar</button>
 
 </div>
 
@@ -276,14 +274,29 @@ iframe {
 
 <script>
 
-let ultimoVideo = null;
+/* ESTADO DA CASA */
+let state = {
+    sala:false,
+    quarto:false,
+    cozinha:false,
+    cinema:false
+};
 
-/* 🏠 MAPA CASA */
-function ativarCasa(el){
-    el.classList.toggle("active");
+/* TOGGLE MAPA */
+function toggle(room){
+
+    state[room] = !state[room];
+
+    const elementos = document.querySelectorAll(".casa");
+
+    elementos.forEach(el => {
+        if(el.innerText.toLowerCase().includes(room)){
+            el.classList.toggle("active");
+        }
+    });
 }
 
-/* 🎬 POPUP MELHORADO */
+/* POPUP */
 function abrir(tipo){
 
     const titulo = document.getElementById("titulo");
@@ -292,30 +305,28 @@ function abrir(tipo){
     const descricao = document.getElementById("descricao");
     const overlay = document.getElementById("overlayLuz");
 
-    overlay.style.opacity = "0.85";
-
-    // reset seguro de vídeo
     video.src = "";
+    overlay.style.opacity = "0.85";
 
     if(tipo === "cinema"){
         titulo.innerText = "Experiência Cinematográfica";
         video.src = "https://www.youtube.com/embed/6v2L2UGZJAM";
         imagem.src = "https://images.unsplash.com/photo-1587825140708-dfaf72ae4b04";
-        descricao.innerText = "Automação completa de cinema residencial.";
+        descricao.innerText = "Cinema residencial automatizado completo.";
     }
 
     if(tipo === "iluminacao"){
         titulo.innerText = "Iluminação Inteligente";
         video.src = "https://www.youtube.com/embed/2WcJQ1mU9zE";
         imagem.src = "https://images.unsplash.com/photo-1507089947368-19c1da9775ae";
-        descricao.innerText = "Cenários automáticos e controle total.";
+        descricao.innerText = "Controle total de luz e cenários.";
     }
 
     if(tipo === "controle"){
         titulo.innerText = "Controle Central";
         video.src = "https://www.youtube.com/embed/ysz5S6PUM-U";
         imagem.src = "https://images.unsplash.com/photo-1558002038-1055907df827";
-        descricao.innerText = "Toda casa no seu celular.";
+        descricao.innerText = "Toda a casa no seu celular.";
     }
 
     if(tipo === "painel"){
@@ -328,10 +339,28 @@ function abrir(tipo){
     document.getElementById("popup").style.display = "flex";
 }
 
+/* FECHAR */
 function fechar(){
     document.getElementById("popup").style.display = "none";
     document.getElementById("video").src = "";
     document.getElementById("overlayLuz").style.opacity = "0";
+}
+
+/* WHATSAPP */
+function whats(){
+    const numero = "5511987251715";
+
+    const msg =
+`Olá, tenho interesse em uma consultoria Domus Prime.
+
+Quero um projeto de automação residencial personalizado.`;
+
+    window.open(`https://wa.me/${numero}?text=${encodeURIComponent(msg)}`, "_blank");
+}
+
+/* SCROLL */
+function scrollToMap(){
+    document.getElementById("mapa").scrollIntoView({behavior:"smooth"});
 }
 
 </script>
