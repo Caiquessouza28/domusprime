@@ -3,42 +3,47 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Casa Inteligente | Automação Residencial</title>
+<title>Casa Inteligente 3.0</title>
 
 <style>
 body {
   margin:0;
   font-family: Arial;
-  background:#0f0f0f;
+  background: radial-gradient(circle at top,#1b1b1b,#000);
   color:white;
 }
 
+/* HEADER */
 header {
-  background-image: url('https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?auto=format&fit=crop&w=1600&q=80');
-  background-size:cover;
-  background-position:center;
   padding:100px 20px;
   text-align:center;
+  background:url('https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?auto=format&fit=crop&w=1600&q=80');
+  background-size:cover;
+  position:relative;
 }
 
-header h1 {
-  font-size:40px;
+header::after {
+  content:"";
+  position:absolute;
+  inset:0;
+  background:rgba(0,0,0,0.65);
 }
+
+header h1, header p {
+  position:relative;
+}
+
+h1 { font-size:42px; }
 
 .btn {
-  background:#00c853;
-  padding:15px 25px;
-  color:white;
+  background:linear-gradient(90deg,#00c853,#00e676);
+  padding:14px 22px;
   border:none;
-  font-size:16px;
+  color:white;
+  font-size:15px;
+  border-radius:10px;
   cursor:pointer;
-  margin-top:15px;
-  border-radius:8px;
-  transition:0.3s;
-}
-
-.btn:hover {
-  transform:scale(1.05);
+  margin-top:10px;
 }
 
 section {
@@ -46,197 +51,187 @@ section {
   text-align:center;
 }
 
+.card {
+  background:rgba(255,255,255,0.05);
+  border:1px solid rgba(255,255,255,0.1);
+  border-radius:15px;
+  padding:20px;
+  margin:10px;
+  width:250px;
+}
+
 .grid {
   display:flex;
   flex-wrap:wrap;
   justify-content:center;
-  gap:20px;
 }
 
-.card {
-  background:#1c1c1c;
+/* INPUTS */
+input, select {
+  padding:12px;
+  border-radius:8px;
+  border:none;
+  margin:5px;
+  width:220px;
+}
+
+/* PAINEL */
+.painel {
+  background:rgba(0,255,120,0.08);
+  border:1px solid rgba(0,255,120,0.2);
   padding:20px;
-  border-radius:10px;
-  width:280px;
-}
-
-img {
-  width:100%;
-  height:180px;
-  object-fit:cover;
-  border-radius:10px;
-}
-
-iframe {
-  width:90%;
-  max-width:600px;
-  height:315px;
-  border-radius:10px;
-  margin-top:20px;
-}
-
-/* SIMULADOR */
-.sim-box {
-  background:#141414;
-  padding:20px;
-  border-radius:12px;
-  margin:15px;
+  border-radius:15px;
+  display:inline-block;
 }
 </style>
 </head>
 
 <body>
 
-<!-- HEADER -->
 <header>
-<h1>Automação Residencial Inteligente</h1>
-<p>Transforme sua casa em um ambiente moderno, confortável e automatizado</p>
-
-<button class="btn" onclick="orcamento()">
-Solicitar Orçamento
-</button>
+<h1>Casa Inteligente 3.0</h1>
+<p>Automação + IA + Orçamento automático</p>
+<button class="btn" onclick="scrollToSim()">Começar Simulação</button>
 </header>
 
-<!-- SERVIÇOS -->
+<!-- PERFIL CLIENTE -->
 <section>
-<h2>🔥 O que instalamos</h2>
+<h2>👤 Crie seu perfil de casa</h2>
+
+<input id="nome" placeholder="Seu nome">
+<input id="whats" placeholder="Seu WhatsApp (DDD + número)">
+
+<br>
+
+<select id="tipoCasa">
+<option value="basica">Casa Simples</option>
+<option value="media">Casa Média</option>
+<option value="luxo">Casa de Alto Padrão</option>
+</select>
+
+<br><br>
+
+<button class="btn" onclick="iniciar()">Iniciar Simulação</button>
+</section>
+
+<!-- SIMULAÇÃO -->
+<section id="simulador" style="display:none">
+
+<h2>🏠 Simulação Inteligente</h2>
 
 <div class="grid">
 
 <div class="card">
-<img src="https://images.unsplash.com/photo-1507089947368-19c1da9775ae?auto=format&fit=crop&w=800&q=80">
-<h3>💡 Iluminação Inteligente</h3>
-<p>Cenas automáticas para cada momento</p>
-</div>
-
-<div class="card">
-<img src="https://images.unsplash.com/photo-1586023492125-27b2c045efd7?auto=format&fit=crop&w=800&q=80">
-<h3>🎬 Modo Cinema</h3>
-<p>Luzes, som e cortinas automáticas</p>
-</div>
-
-<div class="card">
-<img src="https://images.unsplash.com/photo-1558002038-1055907df827?auto=format&fit=crop&w=800&q=80">
-<h3>🏠 Casa Inteligente</h3>
-<p>Controle total pelo celular</p>
-</div>
-
-<div class="card">
-<img src="https://images.unsplash.com/photo-1524758631624-e2822e304c36?auto=format&fit=crop&w=800&q=80">
-<h3>🔊 Som Ambiente</h3>
-<p>Áudio distribuído pela residência</p>
-</div>
-
-</div>
-</section>
-
-<!-- VÍDEOS -->
-<section>
-<h2>🎥 Veja como funciona na prática</h2>
-
-<iframe src="https://www.youtube.com/embed/1Q8fG0TtVAY" allowfullscreen></iframe>
-<iframe src="https://www.youtube.com/embed/3v5G7G1xk8Q" allowfullscreen></iframe>
-</section>
-
-<!-- SIMULADOR -->
-<section id="simulador">
-<h2>🏠 Simule sua Casa Automatizada</h2>
-<p>Interaja com sua futura casa inteligente</p>
-
-<div class="grid">
-
-<div class="sim-box">
 <h3>💡 Luzes</h3>
-<p id="luzStatus">Desligadas</p>
-<button class="btn" onclick="toggleLuz()">Alternar</button>
+<p id="luz">OFF</p>
+<button class="btn" onclick="toggle('luz')">Alternar</button>
 </div>
 
-<div class="sim-box">
+<div class="card">
 <h3>🎬 Cinema</h3>
-<p id="cinemaStatus">Inativo</p>
-<button class="btn" onclick="modoCinema()">Ativar</button>
+<p id="cinema">OFF</p>
+<button class="btn" onclick="toggle('cinema')">Ativar</button>
 </div>
 
-<div class="sim-box">
-<h3>❄️ Climatização</h3>
-<p id="tempStatus">24°C</p>
-<button class="btn" onclick="reduzirTemp()">Diminuir</button>
-</div>
-
-<div class="sim-box">
+<div class="card">
 <h3>🔊 Som</h3>
-<p id="somStatus">Desligado</p>
-<button class="btn" onclick="toggleSom()">Alternar</button>
+<p id="som">OFF</p>
+<button class="btn" onclick="toggle('som')">Alternar</button>
+</div>
+
+<div class="card">
+<h3>❄️ Clima</h3>
+<p id="temp">24°C</p>
+<button class="btn" onclick="temp()">Ajustar</button>
 </div>
 
 </div>
 
-<button class="btn" onclick="enviarSimulacao()">
-📲 Enviar simulação no WhatsApp
-</button>
+<br>
+
+<div class="painel">
+<h3>💰 Orçamento inteligente</h3>
+<p id="valor">R$ 0</p>
+</div>
+
+<br><br>
+
+<button class="btn" onclick="gerar()">Gerar proposta IA</button>
+<button class="btn" onclick="enviar()">Enviar WhatsApp</button>
+
 </section>
 
-<!-- CONTATO -->
-<section>
-<h2>📞 Quero automatizar minha casa</h2>
-<p>Projeto personalizado para sua residência</p>
-
-<button class="btn" onclick="orcamento()">
-Falar no WhatsApp
-</button>
-</section>
-
-<!-- SCRIPT -->
 <script>
-let luz = false;
-let cinema = false;
-let temp = 24;
-let som = false;
 
-function toggleLuz() {
-  luz = !luz;
-  document.getElementById("luzStatus").innerText =
-    luz ? "Ligadas 💡" : "Desligadas";
+let estado = {
+  luz:false,
+  cinema:false,
+  som:false,
+  temp:24,
+  tipo:"basica"
+};
+
+function iniciar(){
+  estado.tipo = document.getElementById("tipoCasa").value;
+  document.getElementById("simulador").style.display = "block";
+  atualizar();
 }
 
-function modoCinema() {
-  cinema = true;
-  luz = false;
-  document.getElementById("cinemaStatus").innerText = "Ativo 🎬";
-  document.getElementById("luzStatus").innerText = "Ambiente cinema ativado";
+function toggle(item){
+  estado[item] = !estado[item];
+  document.getElementById(item).innerText = estado[item] ? "ON" : "OFF";
+  atualizar();
 }
 
-function reduzirTemp() {
-  temp--;
-  document.getElementById("tempStatus").innerText = temp + "°C ❄️";
+function temp(){
+  estado.temp--;
+  document.getElementById("temp").innerText = estado.temp + "°C";
+  atualizar();
 }
 
-function toggleSom() {
-  som = !som;
-  document.getElementById("somStatus").innerText =
-    som ? "Ligado 🔊" : "Desligado";
+/* IA DE PREÇO */
+function atualizar(){
+  let base = 1500;
+
+  if(estado.tipo === "media") base = 3000;
+  if(estado.tipo === "luxo") base = 6000;
+
+  if(estado.luz) base += 1200;
+  if(estado.cinema) base += 3500;
+  if(estado.som) base += 2000;
+  if(estado.temp < 22) base += 1000;
+
+  document.getElementById("valor").innerText = "R$ " + base;
 }
 
-function enviarSimulacao() {
-  const numero = "SEU_NUMERO";
-
-  const msg =
-`Simulação da minha casa:
-- Luzes: ${luz ? "Ligadas" : "Desligadas"}
-- Cinema: ${cinema ? "Ativo" : "Inativo"}
-- Temperatura: ${temp}°C
-- Som: ${som ? "Ligado" : "Desligado"}
-
-Quero esse sistema na minha casa!`;
-
-  window.open(`https://wa.me/${numero}?text=${encodeURIComponent(msg)}`, "_blank");
+function gerar(){
+  alert("IA gerou sua proposta personalizada 🚀");
 }
 
-function orcamento() {
-  const numero = "SEU_NUMERO";
-  const msg = "Olá! Quero um orçamento de automação residencial.";
-  window.open(`https://wa.me/${numero}?text=${encodeURIComponent(msg)}`, "_blank");
+function enviar(){
+  let nome = document.getElementById("nome").value;
+  let whats = document.getElementById("whats").value;
+
+  let msg =
+`Olá, meu nome é ${nome}
+
+Minha simulação:
+- Tipo de casa: ${estado.tipo}
+- Luzes: ${estado.luz}
+- Cinema: ${estado.cinema}
+- Som: ${estado.som}
+- Temperatura: ${estado.temp}°C
+- Valor estimado: ${document.getElementById("valor").innerText}
+
+Quero esse projeto instalado.`;
+
+  window.open(`https://wa.me/${whats}?text=${encodeURIComponent(msg)}`, "_blank");
 }
+
+function scrollToSim(){
+  document.getElementById("simulador").scrollIntoView({behavior:"smooth"});
+}
+
 </script>
 
 </body>
