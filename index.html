@@ -3,19 +3,19 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Casa Inteligente 3.0</title>
+<title>Casa Inteligente 4.0</title>
 
 <style>
 body {
   margin:0;
   font-family: Arial;
-  background: radial-gradient(circle at top,#1b1b1b,#000);
+  background:#000;
   color:white;
 }
 
 /* HEADER */
 header {
-  padding:100px 20px;
+  padding:80px 20px;
   text-align:center;
   background:url('https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?auto=format&fit=crop&w=1600&q=80');
   background-size:cover;
@@ -26,62 +26,70 @@ header::after {
   content:"";
   position:absolute;
   inset:0;
-  background:rgba(0,0,0,0.65);
+  background:rgba(0,0,0,0.7);
 }
 
 header h1, header p {
   position:relative;
+  z-index:1;
 }
 
 h1 { font-size:42px; }
 
-.btn {
-  background:linear-gradient(90deg,#00c853,#00e676);
-  padding:14px 22px;
-  border:none;
-  color:white;
-  font-size:15px;
-  border-radius:10px;
-  cursor:pointer;
-  margin-top:10px;
+/* BOTÕES TOPO */
+.menu {
+  display:flex;
+  justify-content:center;
+  flex-wrap:wrap;
+  gap:10px;
+  padding:20px;
+  background:#111;
 }
 
+.menu button {
+  padding:12px 18px;
+  border:none;
+  border-radius:10px;
+  cursor:pointer;
+  background:#1f1f1f;
+  color:white;
+  transition:0.3s;
+}
+
+.menu button:hover {
+  background:#00c853;
+}
+
+/* SEÇÕES */
 section {
-  padding:50px 20px;
+  display:none;
+  padding:40px 20px;
   text-align:center;
 }
 
+.active {
+  display:block;
+}
+
+/* CARDS */
 .card {
-  background:rgba(255,255,255,0.05);
-  border:1px solid rgba(255,255,255,0.1);
-  border-radius:15px;
+  background:#1a1a1a;
   padding:20px;
   margin:10px;
-  width:250px;
-}
-
-.grid {
-  display:flex;
-  flex-wrap:wrap;
-  justify-content:center;
-}
-
-/* INPUTS */
-input, select {
-  padding:12px;
-  border-radius:8px;
-  border:none;
-  margin:5px;
-  width:220px;
-}
-
-/* PAINEL */
-.painel {
-  background:rgba(0,255,120,0.08);
-  border:1px solid rgba(0,255,120,0.2);
-  padding:20px;
   border-radius:15px;
   display:inline-block;
+  width:260px;
+}
+
+/* BOTÃO */
+.btn {
+  background:linear-gradient(90deg,#00c853,#00e676);
+  padding:12px 18px;
+  border:none;
+  color:white;
+  border-radius:10px;
+  cursor:pointer;
+  margin-top:10px;
 }
 </style>
 </head>
@@ -89,147 +97,153 @@ input, select {
 <body>
 
 <header>
-<h1>Casa Inteligente 3.0</h1>
-<p>Automação + IA + Orçamento automático</p>
-<button class="btn" onclick="scrollToSim()">Começar Simulação</button>
+<h1>Casa Inteligente 4.0</h1>
+<p>Controle por ambientes + automação completa</p>
 </header>
 
-<!-- PERFIL CLIENTE -->
-<section>
-<h2>👤 Crie seu perfil de casa</h2>
+<!-- MENU AMBIENTES -->
+<div class="menu">
+<button onclick="abrir('sala')">🏠 Sala</button>
+<button onclick="abrir('quarto')">🛏️ Quarto</button>
+<button onclick="abrir('cozinha')">🍽️ Cozinha</button>
+<button onclick="abrir('cinema')">🎬 Cinema</button>
+<button onclick="abrir('geral')">⚙️ Geral</button>
+</div>
 
-<input id="nome" placeholder="Seu nome">
-<input id="whats" placeholder="Seu WhatsApp (DDD + número)">
+<!-- SALA -->
+<section id="sala" class="active">
+<h2>🏠 Sala Inteligente</h2>
 
-<br>
+<div class="card">
+<h3>💡 Luz da Sala</h3>
+<p id="luzSala">OFF</p>
+<button class="btn" onclick="toggle('luzSala')">Alternar</button>
+</div>
 
-<select id="tipoCasa">
-<option value="basica">Casa Simples</option>
-<option value="media">Casa Média</option>
-<option value="luxo">Casa de Alto Padrão</option>
-</select>
-
-<br><br>
-
-<button class="btn" onclick="iniciar()">Iniciar Simulação</button>
+<div class="card">
+<h3>🔊 Som Ambiente</h3>
+<p id="somSala">OFF</p>
+<button class="btn" onclick="toggle('somSala')">Alternar</button>
+</div>
 </section>
 
-<!-- SIMULAÇÃO -->
-<section id="simulador" style="display:none">
-
-<h2>🏠 Simulação Inteligente</h2>
-
-<div class="grid">
+<!-- QUARTO -->
+<section id="quarto">
+<h2>🛏️ Quarto Inteligente</h2>
 
 <div class="card">
-<h3>💡 Luzes</h3>
-<p id="luz">OFF</p>
-<button class="btn" onclick="toggle('luz')">Alternar</button>
+<h3>💡 Luz suave</h3>
+<p id="luzQuarto">OFF</p>
+<button class="btn" onclick="toggle('luzQuarto')">Alternar</button>
 </div>
 
 <div class="card">
-<h3>🎬 Cinema</h3>
-<p id="cinema">OFF</p>
-<button class="btn" onclick="toggle('cinema')">Ativar</button>
+<h3>❄️ Climatização</h3>
+<p id="climaQuarto">24°C</p>
+<button class="btn" onclick="temp()">Diminuir</button>
+</div>
+</section>
+
+<!-- COZINHA -->
+<section id="cozinha">
+<h2>🍽️ Cozinha Inteligente</h2>
+
+<div class="card">
+<h3>💡 Iluminação forte</h3>
+<p id="luzCozinha">OFF</p>
+<button class="btn" onclick="toggle('luzCozinha')">Alternar</button>
 </div>
 
 <div class="card">
-<h3>🔊 Som</h3>
-<p id="som">OFF</p>
-<button class="btn" onclick="toggle('som')">Alternar</button>
+<h3>🔔 Alertas</h3>
+<p id="alerta">OFF</p>
+<button class="btn" onclick="toggle('alerta')">Ativar</button>
+</div>
+</section>
+
+<!-- CINEMA -->
+<section id="cinema">
+<h2>🎬 Modo Cinema</h2>
+
+<div class="card">
+<h3>💡 Luzes automáticas</h3>
+<p id="cinemaLuz">OFF</p>
+<button class="btn" onclick="toggle('cinemaLuz')">Ativar</button>
 </div>
 
 <div class="card">
-<h3>❄️ Clima</h3>
-<p id="temp">24°C</p>
-<button class="btn" onclick="temp()">Ajustar</button>
+<h3>🔊 Som Dolby</h3>
+<p id="cinemaSom">OFF</p>
+<button class="btn" onclick="toggle('cinemaSom')">Ativar</button>
 </div>
+</section>
 
+<!-- GERAL -->
+<section id="geral">
+<h2>⚙️ Controle Geral</h2>
+
+<div class="card">
+<h3>💰 Orçamento automático</h3>
+<p id="valor">R$ 0</p>
+<button class="btn" onclick="calcular()">Atualizar</button>
 </div>
 
 <br>
 
-<div class="painel">
-<h3>💰 Orçamento inteligente</h3>
-<p id="valor">R$ 0</p>
-</div>
-
-<br><br>
-
-<button class="btn" onclick="gerar()">Gerar proposta IA</button>
-<button class="btn" onclick="enviar()">Enviar WhatsApp</button>
-
+<button class="btn" onclick="whats()">
+📲 Enviar projeto no WhatsApp
+</button>
 </section>
 
 <script>
 
-let estado = {
-  luz:false,
-  cinema:false,
-  som:false,
-  temp:24,
-  tipo:"basica"
-};
+let estado = {};
 
-function iniciar(){
-  estado.tipo = document.getElementById("tipoCasa").value;
-  document.getElementById("simulador").style.display = "block";
-  atualizar();
+function abrir(secao){
+  document.querySelectorAll("section").forEach(s => s.classList.remove("active"));
+  document.getElementById(secao).classList.add("active");
 }
 
-function toggle(item){
-  estado[item] = !estado[item];
-  document.getElementById(item).innerText = estado[item] ? "ON" : "OFF";
-  atualizar();
+function toggle(id){
+  estado[id] = !estado[id];
+  document.getElementById(id).innerText = estado[id] ? "ON" : "OFF";
+  calcular();
 }
 
 function temp(){
-  estado.temp--;
-  document.getElementById("temp").innerText = estado.temp + "°C";
-  atualizar();
+  let el = document.getElementById("climaQuarto");
+  let val = parseInt(el.innerText);
+  val--;
+  el.innerText = val + "°C";
 }
 
-/* IA DE PREÇO */
-function atualizar(){
-  let base = 1500;
+function calcular(){
+  let base = 2000;
 
-  if(estado.tipo === "media") base = 3000;
-  if(estado.tipo === "luxo") base = 6000;
-
-  if(estado.luz) base += 1200;
-  if(estado.cinema) base += 3500;
-  if(estado.som) base += 2000;
-  if(estado.temp < 22) base += 1000;
+  for(let k in estado){
+    if(estado[k]) base += 800;
+  }
 
   document.getElementById("valor").innerText = "R$ " + base;
 }
 
-function gerar(){
-  alert("IA gerou sua proposta personalizada 🚀");
-}
+function whats(){
+  const numero = "SEU_NUMERO";
 
-function enviar(){
-  let nome = document.getElementById("nome").value;
-  let whats = document.getElementById("whats").value;
+  const msg =
+`Projeto de Casa Inteligente 4.0:
 
-  let msg =
-`Olá, meu nome é ${nome}
+Ambientes configurados:
+- Sala
+- Quarto
+- Cozinha
+- Cinema
 
-Minha simulação:
-- Tipo de casa: ${estado.tipo}
-- Luzes: ${estado.luz}
-- Cinema: ${estado.cinema}
-- Som: ${estado.som}
-- Temperatura: ${estado.temp}°C
-- Valor estimado: ${document.getElementById("valor").innerText}
+Valor estimado: ${document.getElementById("valor").innerText}
 
-Quero esse projeto instalado.`;
+Quero instalar esse sistema.`;
 
-  window.open(`https://wa.me/${whats}?text=${encodeURIComponent(msg)}`, "_blank");
-}
-
-function scrollToSim(){
-  document.getElementById("simulador").scrollIntoView({behavior:"smooth"});
+  window.open(`https://wa.me/${numero}?text=${encodeURIComponent(msg)}`, "_blank");
 }
 
 </script>
