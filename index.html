@@ -1,89 +1,230 @@
-<div class="cards">
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<div class="card" onclick="abrirPopup('luz')">
-    <h3>Iluminação Inteligente</h3>
-    <p>Cenários personalizados que transformam ambientes.</p>
+<title>Domus Prime | Automação Residencial</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600&family=Inter:wght@300;400&display=swap" rel="stylesheet">
+
+<style>
+body {
+    margin: 0;
+    background: #0a0a0a;
+    color: #fff;
+    font-family: 'Inter', sans-serif;
+}
+
+.hero {
+    height: 100vh;
+    background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.95)),
+    url('https://images.unsplash.com/photo-1600607687939-ce8a6c25118c') center/cover;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+.hero h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: 55px;
+    color: #c9a85d;
+}
+
+.hero p {
+    max-width: 650px;
+    margin: 20px;
+    font-size: 18px;
+}
+
+.btn {
+    background: #c9a85d;
+    padding: 15px 35px;
+    color: #000;
+    text-decoration: none;
+    font-weight: bold;
+    border-radius: 5px;
+}
+
+.section {
+    padding: 80px 20px;
+    text-align: center;
+}
+
+.cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 30px;
+}
+
+.card {
+    background: #111;
+    padding: 30px;
+    border-radius: 12px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.card:hover {
+    transform: translateY(-10px);
+    border: 1px solid #c9a85d;
+}
+
+/* POPUP */
+#popup {
+    display:none;
+    position:fixed;
+    top:0;
+    left:0;
+    width:100%;
+    height:100%;
+    background:#000;
+    z-index:999;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    padding:20px;
+}
+
+#galeria img {
+    width:250px;
+    border-radius:10px;
+}
+
+.footer {
+    text-align: center;
+    padding: 40px;
+    border-top: 1px solid #222;
+}
+</style>
+</head>
+
+<body>
+
+<div class="hero">
+    <h1>Domus Prime</h1>
+    <p>Automação residencial de alto padrão para casas e apartamentos. Conforto, segurança e tecnologia em cada ambiente.</p>
+    <a class="btn" href="https://wa.me/5511987251715?text=Quero%20automatizar%20minha%20casa">Solicitar Projeto</a>
 </div>
 
-<div class="card" onclick="abrirPopup('cinema')">
-    <h3>Home Cinema</h3>
-    <p>Experiência imersiva com automação completa.</p>
+<div class="section">
+    <h2 style="color:#c9a85d;">Ambientes Inteligentes</h2>
+
+    <div class="cards">
+
+        <div class="card" onclick="abrirGaleria('sala')">
+            <h3>Sala Inteligente</h3>
+            <p>Iluminação, cinema e automação completa.</p>
+        </div>
+
+        <div class="card" onclick="abrirGaleria('quarto')">
+            <h3>Quarto Automatizado</h3>
+            <p>Conforto e controle total.</p>
+        </div>
+
+        <div class="card" onclick="abrirGaleria('cozinha')">
+            <h3>Cozinha Inteligente</h3>
+            <p>Praticidade e tecnologia no dia a dia.</p>
+        </div>
+
+        <div class="card" onclick="abrirGaleria('externa')">
+            <h3>Área Externa</h3>
+            <p>Iluminação e automação para lazer.</p>
+        </div>
+
+    </div>
 </div>
 
-<div class="card" onclick="abrirPopup('seguranca')">
-    <h3>Segurança</h3>
-    <p>Proteção inteligente integrada à sua rotina.</p>
-</div>
+<!-- POPUP -->
+<div id="popup">
 
-<div class="card" onclick="abrirPopup('controle')">
-    <h3>Controle Total</h3>
-    <p>Gerencie tudo pelo celular ou voz.</p>
-</div>
+    <h2 id="tituloGaleria" style="color:#c9a85d;"></h2>
 
-</div>
+    <div id="galeria" style="display:flex; gap:15px; flex-wrap:wrap; justify-content:center; margin-top:20px;"></div>
 
-<!-- POPUP PREMIUM -->
-<div id="popup" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.95); justify-content:center; align-items:center; flex-direction:column; z-index:999; padding:20px; text-align:center;">
-    
-    <h2 id="tituloPopup" style="color:#c9a85d;"></h2>
-
-    <iframe id="videoPopup" width="90%" height="300" style="border-radius:10px; margin:20px 0;" frameborder="0" allowfullscreen></iframe>
-
-    <p id="descricaoPopup" style="max-width:600px;"></p>
-
-    <a id="botaoVenda" href="#" target="_blank" 
-       style="padding:15px 30px; background:#c9a85d; color:#000; text-decoration:none; font-weight:bold; margin-top:20px; border-radius:5px;">
+    <a id="botaoVenda" href="#" target="_blank"
+       style="margin-top:30px; padding:15px 30px; background:#c9a85d; color:#000; text-decoration:none; font-weight:bold; border-radius:5px;">
        Solicitar Projeto
     </a>
 
     <br><br>
 
-    <button onclick="fecharPopup()" style="padding:10px 25px; background:#333; color:#fff; border:none; cursor:pointer;">
+    <button onclick="fecharGaleria()" style="padding:10px 25px; background:#333; color:#fff; border:none;">
         Fechar
     </button>
 
 </div>
 
+<div class="footer">
+    <p>Domus Prime Automação Residencial</p>
+    <p>São Paulo e Interior</p>
+</div>
+
 <script>
-function abrirPopup(tipo) {
+function abrirGaleria(tipo){
 
     const popup = document.getElementById("popup");
-    const titulo = document.getElementById("tituloPopup");
-    const video = document.getElementById("videoPopup");
-    const descricao = document.getElementById("descricaoPopup");
-    const botao = document.getElementById("botaoVenda");
+    const titulo = document.getElementById("tituloGaleria");
+    const galeria = document.getElementById("galeria");
 
-    if(tipo === "luz"){
-        titulo.innerText = "Iluminação Inteligente";
-        video.src = "https://www.youtube.com/embed/2WcJQ1mU9zE";
-        descricao.innerText = "Controle total da iluminação com cenários personalizados, conforto e sofisticação.";
+    galeria.innerHTML = "";
+
+    let imagens = [];
+
+    if(tipo === "sala"){
+        titulo.innerText = "Sala Inteligente";
+        imagens = [
+            "https://images.unsplash.com/photo-1600607687939-ce8a6c25118c",
+            "https://images.unsplash.com/photo-1586023492125-27b2c045efd7",
+            "https://images.unsplash.com/photo-1615873968403-89e068629265"
+        ];
     }
 
-    if(tipo === "cinema"){
-        titulo.innerText = "Home Cinema Automatizado";
-        video.src = "https://www.youtube.com/embed/tgbNymZ7vqY";
-        descricao.innerText = "Transforme sua sala em um cinema com automação completa de luz, som e imagem.";
+    if(tipo === "quarto"){
+        titulo.innerText = "Quarto Automatizado";
+        imagens = [
+            "https://images.unsplash.com/photo-1505693416388-ac5ce068fe85",
+            "https://images.unsplash.com/photo-1616594039964-ae9021a400a0",
+            "https://images.unsplash.com/photo-1600210492493-0946911123ea"
+        ];
     }
 
-    if(tipo === "seguranca"){
-        titulo.innerText = "Segurança Inteligente";
-        video.src = "https://www.youtube.com/embed/aqz-KE-bpKQ";
-        descricao.innerText = "Proteja sua residência com sistemas integrados de monitoramento e controle.";
+    if(tipo === "cozinha"){
+        titulo.innerText = "Cozinha Inteligente";
+        imagens = [
+            "https://images.unsplash.com/photo-1556911220-bff31c812dba",
+            "https://images.unsplash.com/photo-1600585152220-90363fe7e115",
+            "https://images.unsplash.com/photo-1600566753086-00f18fb6b3ea"
+        ];
     }
 
-    if(tipo === "controle"){
-        titulo.innerText = "Controle Total";
-        video.src = "https://www.youtube.com/embed/ysz5S6PUM-U";
-        descricao.innerText = "Controle toda sua casa pelo celular ou comando de voz com praticidade.";
+    if(tipo === "externa"){
+        titulo.innerText = "Área Externa Automatizada";
+        imagens = [
+            "https://images.unsplash.com/photo-1507089947368-19c1da9775ae",
+            "https://images.unsplash.com/photo-1505691723518-36a5ac3be353",
+            "https://images.unsplash.com/photo-1600585154340-be6161a56a0c"
+        ];
     }
 
-    botao.href = "https://wa.me/5511987251715?text=Olá,%20quero%20um%20projeto%20de%20automação";
+    imagens.forEach(src => {
+        const img = document.createElement("img");
+        img.src = src;
+        galeria.appendChild(img);
+    });
+
+    document.getElementById("botaoVenda").href =
+    "https://wa.me/5511987251715?text=Quero%20um%20projeto%20de%20automação";
 
     popup.style.display = "flex";
 }
 
-function fecharPopup(){
+function fecharGaleria(){
     document.getElementById("popup").style.display = "none";
-    document.getElementById("videoPopup").src = "";
 }
 </script>
+
+</body>
+</html>
