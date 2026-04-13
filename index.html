@@ -22,14 +22,23 @@
 
 </div>
 
-<!-- POPUP -->
-<div id="popup" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.95); justify-content:center; align-items:center; flex-direction:column; z-index:999;">
+<!-- POPUP PREMIUM -->
+<div id="popup" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.95); justify-content:center; align-items:center; flex-direction:column; z-index:999; padding:20px; text-align:center;">
     
     <h2 id="tituloPopup" style="color:#c9a85d;"></h2>
-    
-    <img id="imgPopup" style="max-width:90%; max-height:70%; border-radius:10px; margin:20px 0;">
-    
-    <button onclick="fecharPopup()" style="padding:10px 25px; background:#c9a85d; border:none; cursor:pointer;">
+
+    <iframe id="videoPopup" width="90%" height="300" style="border-radius:10px; margin:20px 0;" frameborder="0" allowfullscreen></iframe>
+
+    <p id="descricaoPopup" style="max-width:600px;"></p>
+
+    <a id="botaoVenda" href="#" target="_blank" 
+       style="padding:15px 30px; background:#c9a85d; color:#000; text-decoration:none; font-weight:bold; margin-top:20px; border-radius:5px;">
+       Solicitar Projeto
+    </a>
+
+    <br><br>
+
+    <button onclick="fecharPopup()" style="padding:10px 25px; background:#333; color:#fff; border:none; cursor:pointer;">
         Fechar
     </button>
 
@@ -39,33 +48,42 @@
 function abrirPopup(tipo) {
 
     const popup = document.getElementById("popup");
-    const img = document.getElementById("imgPopup");
     const titulo = document.getElementById("tituloPopup");
+    const video = document.getElementById("videoPopup");
+    const descricao = document.getElementById("descricaoPopup");
+    const botao = document.getElementById("botaoVenda");
 
     if(tipo === "luz"){
-        img.src = "https://images.unsplash.com/photo-1507089947368-19c1da9775ae";
         titulo.innerText = "Iluminação Inteligente";
+        video.src = "https://www.youtube.com/embed/2WcJQ1mU9zE";
+        descricao.innerText = "Controle total da iluminação com cenários personalizados, conforto e sofisticação.";
     }
 
     if(tipo === "cinema"){
-        img.src = "https://images.unsplash.com/photo-1587825140708-dfaf72ae4b04";
-        titulo.innerText = "Home Cinema";
+        titulo.innerText = "Home Cinema Automatizado";
+        video.src = "https://www.youtube.com/embed/tgbNymZ7vqY";
+        descricao.innerText = "Transforme sua sala em um cinema com automação completa de luz, som e imagem.";
     }
 
     if(tipo === "seguranca"){
-        img.src = "https://images.unsplash.com/photo-1581090700227-1e37b190418e";
-        titulo.innerText = "Segurança Residencial";
+        titulo.innerText = "Segurança Inteligente";
+        video.src = "https://www.youtube.com/embed/aqz-KE-bpKQ";
+        descricao.innerText = "Proteja sua residência com sistemas integrados de monitoramento e controle.";
     }
 
     if(tipo === "controle"){
-        img.src = "https://images.unsplash.com/photo-1558002038-1055907df827";
-        titulo.innerText = "Controle Inteligente";
+        titulo.innerText = "Controle Total";
+        video.src = "https://www.youtube.com/embed/ysz5S6PUM-U";
+        descricao.innerText = "Controle toda sua casa pelo celular ou comando de voz com praticidade.";
     }
+
+    botao.href = "https://wa.me/5511987251715?text=Olá,%20quero%20um%20projeto%20de%20automação";
 
     popup.style.display = "flex";
 }
 
 function fecharPopup(){
     document.getElementById("popup").style.display = "none";
+    document.getElementById("videoPopup").src = "";
 }
 </script>
