@@ -4,209 +4,339 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Domus Prime</title>
+<title>Domus Prime | Smart Home App</title>
 
-<!-- PWA -->
-<meta name="theme-color" content="#0b0b0b">
+<meta name="theme-color" content="#0a0a0a">
+
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600&family=Inter:wght@300;400&display=swap" rel="stylesheet">
 
 <style>
-body{
-  margin:0;
-  font-family: Arial;
-  background:#0b0b0b;
-  color:#fff;
+body {
+    margin:0;
+    background:#0a0a0a;
+    color:#fff;
+    font-family:'Inter', sans-serif;
 }
 
-/* TOP APP BAR */
+/* ===== APP TOP BAR ===== */
 .topbar{
-  padding:18px;
-  background:#111;
-  text-align:center;
-  font-weight:bold;
-  letter-spacing:2px;
-  color:#d6b25e;
+    position:sticky;
+    top:0;
+    background:#111;
+    padding:15px;
+    text-align:center;
+    color:#c9a85d;
+    font-weight:bold;
+    letter-spacing:2px;
+    z-index:10;
 }
 
-/* APP CONTAINER */
-.app{
-  padding:20px;
+/* ===== HERO (DO SEU ORIGINAL MELHORADO) ===== */
+.hero {
+    height:85vh;
+    background:linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.95)),
+    url('https://images.unsplash.com/photo-1600607687939-ce8a6c25118c') center/cover;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    flex-direction:column;
+    text-align:center;
+    padding:20px;
 }
 
-/* GRID AMBIENTES */
-.grid{
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:12px;
+.hero h1 {
+    font-size:52px;
+    color:#c9a85d;
+    font-family:'Playfair Display', serif;
 }
 
-/* CARD STYLE APP */
+.hero p {
+    max-width:700px;
+    margin-top:15px;
+    opacity:0.9;
+}
+
+.btn {
+    background:#c9a85d;
+    padding:14px 26px;
+    color:#000;
+    text-decoration:none;
+    margin-top:20px;
+    font-weight:bold;
+    border-radius:10px;
+    border:none;
+    cursor:pointer;
+}
+
+/* ===== APP GRID (SUBSTITUI CARDS) ===== */
+.app-grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:12px;
+    padding:20px;
+}
+
+/* CARD ESTILO SMARTTHINGS */
 .card{
-  background:#151515;
-  border-radius:16px;
-  padding:18px;
-  position:relative;
-  cursor:pointer;
-  transition:0.25s;
-  border:1px solid #222;
+    background:#151515;
+    padding:18px;
+    border-radius:16px;
+    position:relative;
+    cursor:pointer;
+    transition:0.2s;
+    border:1px solid #222;
 }
 
 .card:active{
-  transform:scale(0.97);
+    transform:scale(0.97);
 }
 
-/* STATUS LIGHT */
+.card h3{
+    margin:0;
+}
+
+.status{
+    margin-top:8px;
+    font-size:13px;
+    color:#aaa;
+}
+
 .dot{
-  width:10px;
-  height:10px;
-  border-radius:50%;
-  background:#333;
-  position:absolute;
-  top:12px;
-  right:12px;
+    width:10px;
+    height:10px;
+    border-radius:50%;
+    background:#333;
+    position:absolute;
+    top:12px;
+    right:12px;
 }
 
 .card.active{
-  border:1px solid #d6b25e;
-  box-shadow:0 0 18px #d6b25e33;
+    border:1px solid #c9a85d;
+    box-shadow:0 0 15px #c9a85d33;
 }
 
 .card.active .dot{
-  background:#d6b25e;
-  box-shadow:0 0 10px #d6b25e;
+    background:#c9a85d;
 }
 
-/* BOTTOM BAR */
-.bottombar{
-  position:fixed;
-  bottom:0;
-  left:0;
-  right:0;
-  background:#111;
-  display:flex;
-  justify-content:space-around;
-  padding:12px;
-  border-top:1px solid #222;
+/* ===== POPUP ===== */
+#popup {
+    display:none;
+    position:fixed;
+    top:0;
+    left:0;
+    width:100%;
+    height:100%;
+    background:#000;
+    z-index:999;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    padding:20px;
 }
 
-.btn{
-  color:#d6b25e;
-  font-size:12px;
-  text-align:center;
+iframe {
+    width:90%;
+    height:250px;
+    border-radius:10px;
+}
+
+#imagem {
+    width:90%;
+    border-radius:10px;
+    margin-top:15px;
+}
+
+/* ===== BOTTOM BAR (APP STYLE) ===== */
+.bottom{
+    position:fixed;
+    bottom:0;
+    left:0;
+    right:0;
+    background:#111;
+    display:flex;
+    justify-content:space-around;
+    padding:12px;
+    border-top:1px solid #222;
+}
+
+.bottom div{
+    font-size:12px;
+    color:#c9a85d;
 }
 
 /* CTA */
 .cta{
-  margin-top:20px;
-  text-align:center;
-}
-
-button{
-  background:#d6b25e;
-  border:none;
-  padding:12px 18px;
-  border-radius:10px;
-  font-weight:bold;
-  cursor:pointer;
+    text-align:center;
+    padding:30px 20px 80px 20px;
 }
 </style>
 </head>
 
 <body>
 
-<div class="topbar">
-DOMUS PRIME
+<div class="topbar">DOMUS PRIME • SMART HOME APP</div>
+
+<!-- HERO ORIGINAL -->
+<div class="hero">
+    <h1>Domus Prime</h1>
+    <p>Automação elétrica inteligente para casas de alto padrão.</p>
+    <button class="btn" onclick="scrollApp()">Entrar no Painel</button>
 </div>
 
-<div class="app">
-
-<h3>🏠 Sua Casa Inteligente</h3>
-<p style="color:#aaa;">Toque para controlar os ambientes</p>
-
-<div class="grid">
+<!-- APP GRID -->
+<div class="app-grid" id="app">
 
 <div class="card" onclick="toggle(this,'sala')">
 <div class="dot"></div>
-<h4>Sala</h4>
-<p id="sala">OFF</p>
+<h3>Sala</h3>
+<div class="status" id="sala">OFF</div>
 </div>
 
 <div class="card" onclick="toggle(this,'quarto')">
 <div class="dot"></div>
-<h4>Quarto</h4>
-<p id="quarto">OFF</p>
+<h3>Quarto</h3>
+<div class="status" id="quarto">OFF</div>
 </div>
 
 <div class="card" onclick="toggle(this,'cozinha')">
 <div class="dot"></div>
-<h4>Cozinha</h4>
-<p id="cozinha">OFF</p>
+<h3>Cozinha</h3>
+<div class="status" id="cozinha">OFF</div>
 </div>
 
 <div class="card" onclick="toggle(this,'cinema')">
 <div class="dot"></div>
-<h4>Cinema</h4>
-<p id="cinema">OFF</p>
+<h3>Cinema</h3>
+<div class="status" id="cinema">OFF</div>
 </div>
 
 </div>
 
+<!-- CTA -->
 <div class="cta">
-<p style="color:#aaa;">Quer instalar esse sistema na sua casa?</p>
-<button onclick="whats()">Agendar Consultoria</button>
+<h3>Quer instalar esse sistema na sua casa?</h3>
+<button class="btn" onclick="whats()">Agendar Consultoria</button>
 </div>
+
+<!-- POPUP (DO SEU ORIGINAL) -->
+<div id="popup">
+
+<h2 id="titulo"></h2>
+
+<iframe id="video"></iframe>
+
+<img id="imagem">
+
+<p id="descricao"></p>
+
+<button class="btn" onclick="fechar()">Fechar</button>
 
 </div>
 
-<!-- bottom navigation -->
-<div class="bottombar">
-<div class="btn">Home</div>
-<div class="btn">Ambientes</div>
-<div class="btn">Cenas</div>
-<div class="btn">Perfil</div>
+<!-- BOTTOM APP BAR -->
+<div class="bottom">
+<div>Home</div>
+<div>Ambientes</div>
+<div>Cenas</div>
+<div>Perfil</div>
 </div>
 
 <script>
 
 let state = {
-  sala:false,
-  quarto:false,
-  cozinha:false,
-  cinema:false
+    sala:false,
+    quarto:false,
+    cozinha:false,
+    cinema:false
 };
 
-/* TOGGLE APP */
+/* ===== TOGGLE APP ===== */
 function toggle(el,room){
 
-  state[room] = !state[room];
+    state[room] = !state[room];
 
-  if(state[room]){
-    el.classList.add("active");
-    document.getElementById(room).innerText = "ON";
-  }else{
-    el.classList.remove("active");
-    document.getElementById(room).innerText = "OFF";
-  }
+    if(state[room]){
+        el.classList.add("active");
+        document.getElementById(room).innerText = "ON";
+    } else {
+        el.classList.remove("active");
+        document.getElementById(room).innerText = "OFF";
+    }
+
+    abrir(room); // integra com popup automaticamente
 }
 
-/* WHATSAPP FUNIL */
+/* ===== POPUP INTELIGENTE ===== */
+function abrir(tipo){
+
+    const titulo = document.getElementById("titulo");
+    const video = document.getElementById("video");
+    const imagem = document.getElementById("imagem");
+    const descricao = document.getElementById("descricao");
+
+    video.src = "";
+
+    if(tipo === "sala"){
+        titulo.innerText = "Sala Inteligente";
+        video.src = "https://www.youtube.com/embed/2WcJQ1mU9zE";
+        imagem.src = "https://images.unsplash.com/photo-1507089947368-19c1da9775ae";
+        descricao.innerText = state.sala ? "Sala automatizada em funcionamento" : "Ative a automação da sala";
+    }
+
+    if(tipo === "quarto"){
+        titulo.innerText = "Quarto Inteligente";
+        video.src = "https://www.youtube.com/embed/ysz5S6PUM-U";
+        imagem.src = "https://images.unsplash.com/photo-1558002038-1055907df827";
+        descricao.innerText = state.quarto ? "Ambiente relax ativo" : "Automação de descanso disponível";
+    }
+
+    if(tipo === "cozinha"){
+        titulo.innerText = "Cozinha Inteligente";
+        video.src = "https://www.youtube.com/embed/aqz-KE-bpKQ";
+        imagem.src = "https://images.unsplash.com/photo-1581090700227-1e37b190418e";
+        descricao.innerText = state.cozinha ? "Cozinha automatizada" : "Controle inteligente de energia";
+    }
+
+    if(tipo === "cinema"){
+        titulo.innerText = "Cinema Residencial";
+        video.src = "https://www.youtube.com/embed/6v2L2UGZJAM";
+        imagem.src = "https://images.unsplash.com/photo-1587825140708-dfaf72ae4b04";
+        descricao.innerText = state.cinema ? "Cinema em modo imersivo" : "Ative sua experiência cinematográfica";
+    }
+
+    document.getElementById("popup").style.display = "flex";
+}
+
+/* ===== FECHAR ===== */
+function fechar(){
+    document.getElementById("popup").style.display = "none";
+    document.getElementById("video").src = "";
+}
+
+/* ===== WHATSAPP ===== */
 function whats(){
 
-  const numero = "5511987251715";
+    const numero = "5511987251715";
 
-  const msg =
+    const msg =
 `Olá Domus Prime,
 
 Tenho interesse em uma consultoria de automação residencial.
 
-Ambientes:
-- Sala: ${state.sala}
-- Quarto: ${state.quarto}
-- Cozinha: ${state.cozinha}
-- Cinema: ${state.cinema}
+Status:
+Sala: ${state.sala}
+Quarto: ${state.quarto}
+Cozinha: ${state.cozinha}
+Cinema: ${state.cinema}`;
 
-Quero instalar o sistema.`;
+    window.open(`https://wa.me/${numero}?text=${encodeURIComponent(msg)}`, "_blank");
+}
 
-  window.open(`https://wa.me/${numero}?text=${encodeURIComponent(msg)}`, "_blank");
+/* SCROLL */
+function scrollApp(){
+    document.getElementById("app").scrollIntoView({behavior:"smooth"});
 }
 
 </script>
