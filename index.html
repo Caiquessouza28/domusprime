@@ -3,261 +3,239 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>Domus Prime | Automação Residencial</title>
-
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600&family=Inter:wght@300;400&display=swap" rel="stylesheet">
+<title>Casa Inteligente | Automação Residencial</title>
 
 <style>
 body {
-    margin:0;
-    background:#0a0a0a;
-    color:#fff;
-    font-family:'Inter', sans-serif;
+  margin:0;
+  font-family: Arial;
+  background:#0f0f0f;
+  color:white;
 }
 
-.hero {
-    height:100vh;
-    background:linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.95)),
-    url('https://images.unsplash.com/photo-1600607687939-ce8a6c25118c') center/cover;
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    flex-direction:column;
-    text-align:center;
-    padding:20px;
+header {
+  background-image: url('https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?auto=format&fit=crop&w=1600&q=80');
+  background-size:cover;
+  background-position:center;
+  padding:100px 20px;
+  text-align:center;
 }
 
-.hero h1 {
-    font-size:50px;
-    color:#c9a85d;
-}
-
-.hero p {
-    max-width:700px;
-    margin-top:15px;
+header h1 {
+  font-size:40px;
 }
 
 .btn {
-    background:#c9a85d;
-    padding:15px 30px;
-    color:#000;
-    text-decoration:none;
-    margin-top:20px;
-    font-weight:bold;
+  background:#00c853;
+  padding:15px 25px;
+  color:white;
+  border:none;
+  font-size:16px;
+  cursor:pointer;
+  margin-top:15px;
+  border-radius:8px;
+  transition:0.3s;
 }
 
-.section {
-    padding:70px 20px;
-    text-align:center;
+.btn:hover {
+  transform:scale(1.05);
 }
 
-.cards {
-    display:grid;
-    grid-template-columns:repeat(auto-fit, minmax(250px,1fr));
-    gap:25px;
-    margin-top:30px;
+section {
+  padding:50px 20px;
+  text-align:center;
+}
+
+.grid {
+  display:flex;
+  flex-wrap:wrap;
+  justify-content:center;
+  gap:20px;
 }
 
 .card {
-    background:#111;
-    padding:25px;
-    cursor:pointer;
-    transition:0.3s;
+  background:#1c1c1c;
+  padding:20px;
+  border-radius:10px;
+  width:280px;
 }
 
-.card:hover {
-    border:1px solid #c9a85d;
-}
-
-/* popup */
-#popup {
-    display:none;
-    position:fixed;
-    top:0;
-    left:0;
-    width:100%;
-    height:100%;
-    background:#000;
-    z-index:999;
-    flex-direction:column;
-    align-items:center;
-    justify-content:center;
-    padding:20px;
+img {
+  width:100%;
+  height:180px;
+  object-fit:cover;
+  border-radius:10px;
 }
 
 iframe {
-    width:80%;
-    height:300px;
-    border-radius:10px;
+  width:90%;
+  max-width:600px;
+  height:315px;
+  border-radius:10px;
+  margin-top:20px;
 }
 
-#imagem {
-    width:80%;
-    border-radius:10px;
-    margin-top:15px;
-}
-
-#overlayLuz {
-    position:fixed;
-    top:0;
-    left:0;
-    width:100%;
-    height:100%;
-    background:#000;
-    opacity:0;
-    transition:opacity 2s;
-    z-index:998;
+/* SIMULADOR */
+.sim-box {
+  background:#141414;
+  padding:20px;
+  border-radius:12px;
+  margin:15px;
 }
 </style>
 </head>
 
 <body>
 
-<!-- HERO -->
-<div class="hero">
-    <h1>Domus Prime</h1>
-    <p>
-    Automação elétrica inteligente para casas de alto padrão.  
-    Controle total de iluminação, cinema, climatização e segurança.
-    </p>
+<!-- HEADER -->
+<header>
+<h1>Automação Residencial Inteligente</h1>
+<p>Transforme sua casa em um ambiente moderno, confortável e automatizado</p>
 
-    <p style="color:#c9a85d;">Atendimento limitado para São Paulo e região</p>
+<button class="btn" onclick="orcamento()">
+Solicitar Orçamento
+</button>
+</header>
 
-    <a class="btn" href="https://wa.me/5511987251715?text=Quero%20automatizar%20minha%20casa">
-        Falar com especialista
-    </a>
+<!-- SERVIÇOS -->
+<section>
+<h2>🔥 O que instalamos</h2>
+
+<div class="grid">
+
+<div class="card">
+<img src="https://images.unsplash.com/photo-1507089947368-19c1da9775ae?auto=format&fit=crop&w=800&q=80">
+<h3>💡 Iluminação Inteligente</h3>
+<p>Cenas automáticas para cada momento</p>
 </div>
 
-<!-- DIFERENCIAL -->
-<div class="section">
-    <h2 style="color:#c9a85d;">Integração Elétrica Profissional</h2>
-    <p>
-    Projetos com painéis de automação, circuitos dedicados e integração completa 
-    entre iluminação, climatização e sistemas inteligentes.
-    </p>
+<div class="card">
+<img src="https://images.unsplash.com/photo-1586023492125-27b2c045efd7?auto=format&fit=crop&w=800&q=80">
+<h3>🎬 Modo Cinema</h3>
+<p>Luzes, som e cortinas automáticas</p>
 </div>
 
-<!-- AMBIENTES -->
-<div class="section">
-    <h2 style="color:#c9a85d;">Soluções Inteligentes</h2>
-
-    <div class="cards">
-
-        <div class="card" onclick="abrir('cinema')">
-            <h3>Experiência Cinematográfica</h3>
-            <p>Projetor automático, iluminação e som integrados</p>
-        </div>
-
-        <div class="card" onclick="abrir('iluminacao')">
-            <h3>Iluminação Inteligente</h3>
-            <p>Cenários, dimerização e automação completa</p>
-        </div>
-
-        <div class="card" onclick="abrir('controle')">
-            <h3>Controle Central</h3>
-            <p>Tablet na parede e controle total da casa</p>
-        </div>
-
-        <div class="card" onclick="abrir('painel')">
-            <h3>Painel de Automação</h3>
-            <p>Integração elétrica profissional</p>
-        </div>
-
-    </div>
+<div class="card">
+<img src="https://images.unsplash.com/photo-1558002038-1055907df827?auto=format&fit=crop&w=800&q=80">
+<h3>🏠 Casa Inteligente</h3>
+<p>Controle total pelo celular</p>
 </div>
 
-<!-- PROVA -->
-<div class="section">
-    <h2 style="color:#c9a85d;">Projetos Realizados</h2>
-    <p>Ambientes automatizados em residências de alto padrão em São Paulo</p>
+<div class="card">
+<img src="https://images.unsplash.com/photo-1524758631624-e2822e304c36?auto=format&fit=crop&w=800&q=80">
+<h3>🔊 Som Ambiente</h3>
+<p>Áudio distribuído pela residência</p>
 </div>
 
-<!-- CTA FINAL -->
-<div class="section">
-    <h2>Solicite seu projeto personalizado</h2>
-    <a class="btn" href="https://wa.me/5511987251715?text=Quero%20um%20projeto%20de%20automação">
-        Quero automatizar minha casa
-    </a>
+</div>
+</section>
+
+<!-- VÍDEOS -->
+<section>
+<h2>🎥 Veja como funciona na prática</h2>
+
+<iframe src="https://www.youtube.com/embed/1Q8fG0TtVAY" allowfullscreen></iframe>
+<iframe src="https://www.youtube.com/embed/3v5G7G1xk8Q" allowfullscreen></iframe>
+</section>
+
+<!-- SIMULADOR -->
+<section id="simulador">
+<h2>🏠 Simule sua Casa Automatizada</h2>
+<p>Interaja com sua futura casa inteligente</p>
+
+<div class="grid">
+
+<div class="sim-box">
+<h3>💡 Luzes</h3>
+<p id="luzStatus">Desligadas</p>
+<button class="btn" onclick="toggleLuz()">Alternar</button>
 </div>
 
-<!-- POPUP -->
-<div id="popup">
+<div class="sim-box">
+<h3>🎬 Cinema</h3>
+<p id="cinemaStatus">Inativo</p>
+<button class="btn" onclick="modoCinema()">Ativar</button>
+</div>
 
-    <h2 id="titulo"></h2>
+<div class="sim-box">
+<h3>❄️ Climatização</h3>
+<p id="tempStatus">24°C</p>
+<button class="btn" onclick="reduzirTemp()">Diminuir</button>
+</div>
 
-    <iframe id="video"></iframe>
-
-    <img id="imagem">
-
-    <p id="descricao"></p>
-
-    <p style="color:#c9a85d;">Projeto personalizado para seu imóvel</p>
-
-    <a id="whats" class="btn" target="_blank">
-        Falar com especialista
-    </a>
-
-    <button onclick="fechar()" style="margin-top:20px;">Fechar</button>
+<div class="sim-box">
+<h3>🔊 Som</h3>
+<p id="somStatus">Desligado</p>
+<button class="btn" onclick="toggleSom()">Alternar</button>
+</div>
 
 </div>
 
-<div id="overlayLuz"></div>
+<button class="btn" onclick="enviarSimulacao()">
+📲 Enviar simulação no WhatsApp
+</button>
+</section>
 
+<!-- CONTATO -->
+<section>
+<h2>📞 Quero automatizar minha casa</h2>
+<p>Projeto personalizado para sua residência</p>
+
+<button class="btn" onclick="orcamento()">
+Falar no WhatsApp
+</button>
+</section>
+
+<!-- SCRIPT -->
 <script>
-function abrir(tipo){
+let luz = false;
+let cinema = false;
+let temp = 24;
+let som = false;
 
-    const titulo = document.getElementById("titulo");
-    const video = document.getElementById("video");
-    const imagem = document.getElementById("imagem");
-    const descricao = document.getElementById("descricao");
-    const overlay = document.getElementById("overlayLuz");
-
-    if(tipo === "cinema"){
-        titulo.innerText = "Experiência Cinematográfica";
-
-        overlay.style.opacity = "0.8";
-
-        setTimeout(() => {
-            video.src = "https://www.youtube.com/embed/6v2L2UGZJAM?autoplay=1";
-        }, 1000);
-
-        imagem.src = "https://images.unsplash.com/photo-1587825140708-dfaf72ae4b04";
-
-        descricao.innerText = "Projetor embutido, iluminação automatizada e controle via tablet.";
-    }
-
-    if(tipo === "iluminacao"){
-        titulo.innerText = "Iluminação Inteligente";
-        video.src = "https://www.youtube.com/embed/2WcJQ1mU9zE";
-        imagem.src = "https://images.unsplash.com/photo-1507089947368-19c1da9775ae";
-        descricao.innerText = "Controle de luz, cenários e integração com sensores.";
-    }
-
-    if(tipo === "controle"){
-        titulo.innerText = "Controle Central";
-        video.src = "https://www.youtube.com/embed/ysz5S6PUM-U";
-        imagem.src = "https://images.unsplash.com/photo-1558002038-1055907df827";
-        descricao.innerText = "Controle completo via tablet ou celular.";
-    }
-
-    if(tipo === "painel"){
-        titulo.innerText = "Painel de Automação";
-        video.src = "https://www.youtube.com/embed/aqz-KE-bpKQ";
-        imagem.src = "https://images.unsplash.com/photo-1581090700227-1e37b190418e";
-        descricao.innerText = "Sistema elétrico centralizado e profissional.";
-    }
-
-    document.getElementById("whats").href =
-    "https://wa.me/5511987251715?text=Quero%20automatizar%20minha%20casa";
-
-    document.getElementById("popup").style.display = "flex";
+function toggleLuz() {
+  luz = !luz;
+  document.getElementById("luzStatus").innerText =
+    luz ? "Ligadas 💡" : "Desligadas";
 }
 
-function fechar(){
-    document.getElementById("popup").style.display = "none";
-    document.getElementById("video").src = "";
-    document.getElementById("overlayLuz").style.opacity = "0";
+function modoCinema() {
+  cinema = true;
+  luz = false;
+  document.getElementById("cinemaStatus").innerText = "Ativo 🎬";
+  document.getElementById("luzStatus").innerText = "Ambiente cinema ativado";
+}
+
+function reduzirTemp() {
+  temp--;
+  document.getElementById("tempStatus").innerText = temp + "°C ❄️";
+}
+
+function toggleSom() {
+  som = !som;
+  document.getElementById("somStatus").innerText =
+    som ? "Ligado 🔊" : "Desligado";
+}
+
+function enviarSimulacao() {
+  const numero = "SEU_NUMERO";
+
+  const msg =
+`Simulação da minha casa:
+- Luzes: ${luz ? "Ligadas" : "Desligadas"}
+- Cinema: ${cinema ? "Ativo" : "Inativo"}
+- Temperatura: ${temp}°C
+- Som: ${som ? "Ligado" : "Desligado"}
+
+Quero esse sistema na minha casa!`;
+
+  window.open(`https://wa.me/${numero}?text=${encodeURIComponent(msg)}`, "_blank");
+}
+
+function orcamento() {
+  const numero = "SEU_NUMERO";
+  const msg = "Olá! Quero um orçamento de automação residencial.";
+  window.open(`https://wa.me/${numero}?text=${encodeURIComponent(msg)}`, "_blank");
 }
 </script>
 
