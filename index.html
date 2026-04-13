@@ -25,11 +25,17 @@ body {
     align-items:center;
     flex-direction:column;
     text-align:center;
+    padding:20px;
 }
 
 .hero h1 {
-    font-size:55px;
+    font-size:50px;
     color:#c9a85d;
+}
+
+.hero p {
+    max-width:700px;
+    margin-top:15px;
 }
 
 .btn {
@@ -37,22 +43,25 @@ body {
     padding:15px 30px;
     color:#000;
     text-decoration:none;
+    margin-top:20px;
+    font-weight:bold;
 }
 
 .section {
-    padding:80px 20px;
+    padding:70px 20px;
     text-align:center;
 }
 
 .cards {
     display:grid;
     grid-template-columns:repeat(auto-fit, minmax(250px,1fr));
-    gap:30px;
+    gap:25px;
+    margin-top:30px;
 }
 
 .card {
     background:#111;
-    padding:30px;
+    padding:25px;
     cursor:pointer;
     transition:0.3s;
 }
@@ -61,7 +70,7 @@ body {
     border:1px solid #c9a85d;
 }
 
-/* POPUP */
+/* popup */
 #popup {
     display:none;
     position:fixed;
@@ -74,6 +83,7 @@ body {
     flex-direction:column;
     align-items:center;
     justify-content:center;
+    padding:20px;
 }
 
 iframe {
@@ -88,7 +98,6 @@ iframe {
     margin-top:15px;
 }
 
-/* luz */
 #overlayLuz {
     position:fixed;
     top:0;
@@ -105,12 +114,31 @@ iframe {
 
 <body>
 
+<!-- HERO -->
 <div class="hero">
     <h1>Domus Prime</h1>
-    <p>Automação elétrica residencial de alto padrão</p>
-    <a class="btn" href="https://wa.me/5511987251715">Solicitar Projeto</a>
+    <p>
+    Automação elétrica inteligente para casas de alto padrão.  
+    Controle total de iluminação, cinema, climatização e segurança.
+    </p>
+
+    <p style="color:#c9a85d;">Atendimento limitado para São Paulo e região</p>
+
+    <a class="btn" href="https://wa.me/5511987251715?text=Quero%20automatizar%20minha%20casa">
+        Falar com especialista
+    </a>
 </div>
 
+<!-- DIFERENCIAL -->
+<div class="section">
+    <h2 style="color:#c9a85d;">Integração Elétrica Profissional</h2>
+    <p>
+    Projetos com painéis de automação, circuitos dedicados e integração completa 
+    entre iluminação, climatização e sistemas inteligentes.
+    </p>
+</div>
+
+<!-- AMBIENTES -->
 <div class="section">
     <h2 style="color:#c9a85d;">Soluções Inteligentes</h2>
 
@@ -118,25 +146,39 @@ iframe {
 
         <div class="card" onclick="abrir('cinema')">
             <h3>Experiência Cinematográfica</h3>
-            <p>Automação completa com projetor, iluminação e som.</p>
+            <p>Projetor automático, iluminação e som integrados</p>
         </div>
 
         <div class="card" onclick="abrir('iluminacao')">
-            <h3>Iluminação Automatizada</h3>
-            <p>Dimerização, cenários e controle inteligente.</p>
+            <h3>Iluminação Inteligente</h3>
+            <p>Cenários, dimerização e automação completa</p>
         </div>
 
         <div class="card" onclick="abrir('controle')">
             <h3>Controle Central</h3>
-            <p>Tablet na parede e controle total da residência.</p>
+            <p>Tablet na parede e controle total da casa</p>
         </div>
 
         <div class="card" onclick="abrir('painel')">
             <h3>Painel de Automação</h3>
-            <p>Integração elétrica profissional e centralizada.</p>
+            <p>Integração elétrica profissional</p>
         </div>
 
     </div>
+</div>
+
+<!-- PROVA -->
+<div class="section">
+    <h2 style="color:#c9a85d;">Projetos Realizados</h2>
+    <p>Ambientes automatizados em residências de alto padrão em São Paulo</p>
+</div>
+
+<!-- CTA FINAL -->
+<div class="section">
+    <h2>Solicite seu projeto personalizado</h2>
+    <a class="btn" href="https://wa.me/5511987251715?text=Quero%20um%20projeto%20de%20automação">
+        Quero automatizar minha casa
+    </a>
 </div>
 
 <!-- POPUP -->
@@ -144,13 +186,17 @@ iframe {
 
     <h2 id="titulo"></h2>
 
-    <iframe id="video" frameborder="0" allowfullscreen></iframe>
+    <iframe id="video"></iframe>
 
     <img id="imagem">
 
-    <p id="descricao" style="max-width:600px;"></p>
+    <p id="descricao"></p>
 
-    <a id="whats" class="btn" target="_blank">Solicitar Projeto</a>
+    <p style="color:#c9a85d;">Projeto personalizado para seu imóvel</p>
+
+    <a id="whats" class="btn" target="_blank">
+        Falar com especialista
+    </a>
 
     <button onclick="fechar()" style="margin-top:20px;">Fechar</button>
 
@@ -161,7 +207,6 @@ iframe {
 <script>
 function abrir(tipo){
 
-    const popup = document.getElementById("popup");
     const titulo = document.getElementById("titulo");
     const video = document.getElementById("video");
     const imagem = document.getElementById("imagem");
@@ -179,43 +224,34 @@ function abrir(tipo){
 
         imagem.src = "https://images.unsplash.com/photo-1587825140708-dfaf72ae4b04";
 
-        descricao.innerText = "Projetor embutido, automação de iluminação, áudio e controle total via tablet.";
+        descricao.innerText = "Projetor embutido, iluminação automatizada e controle via tablet.";
     }
 
     if(tipo === "iluminacao"){
-        titulo.innerText = "Iluminação Automatizada";
-
+        titulo.innerText = "Iluminação Inteligente";
         video.src = "https://www.youtube.com/embed/2WcJQ1mU9zE";
-
         imagem.src = "https://images.unsplash.com/photo-1507089947368-19c1da9775ae";
-
-        descricao.innerText = "Controle de intensidade, cenários e integração completa com sensores.";
+        descricao.innerText = "Controle de luz, cenários e integração com sensores.";
     }
 
     if(tipo === "controle"){
         titulo.innerText = "Controle Central";
-
         video.src = "https://www.youtube.com/embed/ysz5S6PUM-U";
-
         imagem.src = "https://images.unsplash.com/photo-1558002038-1055907df827";
-
-        descricao.innerText = "Controle total da residência por tablet fixo ou smartphone.";
+        descricao.innerText = "Controle completo via tablet ou celular.";
     }
 
     if(tipo === "painel"){
         titulo.innerText = "Painel de Automação";
-
         video.src = "https://www.youtube.com/embed/aqz-KE-bpKQ";
-
         imagem.src = "https://images.unsplash.com/photo-1581090700227-1e37b190418e";
-
-        descricao.innerText = "Sistema elétrico centralizado com integração de todos os circuitos.";
+        descricao.innerText = "Sistema elétrico centralizado e profissional.";
     }
 
     document.getElementById("whats").href =
-    "https://wa.me/5511987251715?text=Quero%20um%20projeto%20de%20automação";
+    "https://wa.me/5511987251715?text=Quero%20automatizar%20minha%20casa";
 
-    popup.style.display = "flex";
+    document.getElementById("popup").style.display = "flex";
 }
 
 function fechar(){
