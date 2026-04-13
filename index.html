@@ -4,363 +4,209 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Domus Prime | Automação Residencial</title>
+<title>Domus Prime</title>
 
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600&family=Inter:wght@300;400&display=swap" rel="stylesheet">
+<!-- PWA -->
+<meta name="theme-color" content="#0b0b0b">
 
 <style>
-body {
-    margin:0;
-    background:#0a0a0a;
-    color:#fff;
-    font-family:'Inter', sans-serif;
+body{
+  margin:0;
+  font-family: Arial;
+  background:#0b0b0b;
+  color:#fff;
 }
 
-/* HERO */
-.hero {
-    height:100vh;
-    background:linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.95)),
-    url('https://images.unsplash.com/photo-1600607687939-ce8a6c25118c') center/cover;
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    flex-direction:column;
-    text-align:center;
-    padding:20px;
+/* TOP APP BAR */
+.topbar{
+  padding:18px;
+  background:#111;
+  text-align:center;
+  font-weight:bold;
+  letter-spacing:2px;
+  color:#d6b25e;
 }
 
-.hero h1 {
-    font-size:52px;
-    color:#c9a85d;
-    font-family:'Playfair Display', serif;
+/* APP CONTAINER */
+.app{
+  padding:20px;
 }
 
-.hero p {
-    max-width:700px;
-    margin-top:15px;
-    opacity:0.9;
+/* GRID AMBIENTES */
+.grid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:12px;
 }
 
-.btn {
-    background:#c9a85d;
-    padding:15px 30px;
-    color:#000;
-    text-decoration:none;
-    margin-top:20px;
-    font-weight:bold;
-    border-radius:8px;
-    transition:0.3s;
-    cursor:pointer;
-    border:none;
+/* CARD STYLE APP */
+.card{
+  background:#151515;
+  border-radius:16px;
+  padding:18px;
+  position:relative;
+  cursor:pointer;
+  transition:0.25s;
+  border:1px solid #222;
 }
 
-.btn:hover {
-    transform:scale(1.05);
+.card:active{
+  transform:scale(0.97);
 }
 
-/* SECTION */
-.section {
-    padding:70px 20px;
-    text-align:center;
+/* STATUS LIGHT */
+.dot{
+  width:10px;
+  height:10px;
+  border-radius:50%;
+  background:#333;
+  position:absolute;
+  top:12px;
+  right:12px;
 }
 
-/* CARDS */
-.cards {
-    display:grid;
-    grid-template-columns:repeat(auto-fit, minmax(250px,1fr));
-    gap:25px;
-    margin-top:30px;
+.card.active{
+  border:1px solid #d6b25e;
+  box-shadow:0 0 18px #d6b25e33;
 }
 
-.card {
-    background:#111;
-    padding:25px;
-    cursor:pointer;
-    transition:0.3s;
-    border-radius:10px;
+.card.active .dot{
+  background:#d6b25e;
+  box-shadow:0 0 10px #d6b25e;
 }
 
-.card:hover {
-    border:1px solid #c9a85d;
-    transform:translateY(-5px);
+/* BOTTOM BAR */
+.bottombar{
+  position:fixed;
+  bottom:0;
+  left:0;
+  right:0;
+  background:#111;
+  display:flex;
+  justify-content:space-around;
+  padding:12px;
+  border-top:1px solid #222;
 }
 
-/* MAPA CASA */
-.mapa {
-    display:grid;
-    grid-template-columns:repeat(2, 1fr);
-    gap:10px;
-    max-width:300px;
-    margin:30px auto;
+.btn{
+  color:#d6b25e;
+  font-size:12px;
+  text-align:center;
 }
 
-.casa {
-    background:#111;
-    padding:20px;
-    border-radius:10px;
-    cursor:pointer;
-    position:relative;
-    transition:0.3s;
+/* CTA */
+.cta{
+  margin-top:20px;
+  text-align:center;
 }
 
-.casa.active {
-    border:1px solid #c9a85d;
-    box-shadow:0 0 15px #c9a85d33;
-}
-
-.luz {
-    position:absolute;
-    top:10px;
-    right:10px;
-    width:10px;
-    height:10px;
-    border-radius:50%;
-    background:#333;
-}
-
-.casa.active .luz {
-    background:#c9a85d;
-}
-
-/* POPUP */
-#popup {
-    display:none;
-    position:fixed;
-    top:0;
-    left:0;
-    width:100%;
-    height:100%;
-    background:#000;
-    z-index:999;
-    flex-direction:column;
-    align-items:center;
-    justify-content:center;
-    padding:20px;
-}
-
-iframe {
-    width:80%;
-    height:300px;
-    border-radius:10px;
-}
-
-#imagem {
-    width:80%;
-    border-radius:10px;
-    margin-top:15px;
-}
-
-#overlayLuz {
-    position:fixed;
-    top:0;
-    left:0;
-    width:100%;
-    height:100%;
-    background:#000;
-    opacity:0;
-    transition:opacity 1.5s;
-    z-index:998;
+button{
+  background:#d6b25e;
+  border:none;
+  padding:12px 18px;
+  border-radius:10px;
+  font-weight:bold;
+  cursor:pointer;
 }
 </style>
 </head>
 
 <body>
 
-<!-- HERO -->
-<div class="hero">
-    <h1>Domus Prime</h1>
-    <p>
-    Automação elétrica inteligente para casas de alto padrão.  
-    Controle total de iluminação, cinema, climatização e segurança.
-    </p>
-
-    <button class="btn" onclick="scrollToMap()">Falar com especialista</button>
+<div class="topbar">
+DOMUS PRIME
 </div>
 
-<!-- MAPA -->
-<div class="section" id="mapa">
+<div class="app">
 
-<h2 style="color:#c9a85d;">Simule sua casa inteligente</h2>
+<h3>🏠 Sua Casa Inteligente</h3>
+<p style="color:#aaa;">Toque para controlar os ambientes</p>
 
-<div class="mapa">
+<div class="grid">
 
-<div class="casa" onclick="toggle('sala')">
-Sala
-<div class="luz"></div>
+<div class="card" onclick="toggle(this,'sala')">
+<div class="dot"></div>
+<h4>Sala</h4>
+<p id="sala">OFF</p>
 </div>
 
-<div class="casa" onclick="toggle('quarto')">
-Quarto
-<div class="luz"></div>
+<div class="card" onclick="toggle(this,'quarto')">
+<div class="dot"></div>
+<h4>Quarto</h4>
+<p id="quarto">OFF</p>
 </div>
 
-<div class="casa" onclick="toggle('cozinha')">
-Cozinha
-<div class="luz"></div>
+<div class="card" onclick="toggle(this,'cozinha')">
+<div class="dot"></div>
+<h4>Cozinha</h4>
+<p id="cozinha">OFF</p>
 </div>
 
-<div class="casa" onclick="toggle('cinema')">
-Cinema
-<div class="luz"></div>
+<div class="card" onclick="toggle(this,'cinema')">
+<div class="dot"></div>
+<h4>Cinema</h4>
+<p id="cinema">OFF</p>
 </div>
 
 </div>
 
-</div>
-
-<!-- DIFERENCIAL -->
-<div class="section">
-<h2 style="color:#c9a85d;">Integração Elétrica Profissional</h2>
-<p>
-Projetos completos de automação residencial, iluminação e controle central.
-</p>
-</div>
-
-<!-- SOLUÇÕES -->
-<div class="section">
-<h2 style="color:#c9a85d;">Soluções Inteligentes</h2>
-
-<div class="cards">
-
-<div class="card" onclick="abrir('cinema')">
-<h3>Experiência Cinematográfica</h3>
-<p>Automação completa de cinema</p>
-</div>
-
-<div class="card" onclick="abrir('iluminacao')">
-<h3>Iluminação Inteligente</h3>
-<p>Cenários automáticos</p>
-</div>
-
-<div class="card" onclick="abrir('controle')">
-<h3>Controle Central</h3>
-<p>Tudo no celular</p>
-</div>
-
-<div class="card" onclick="abrir('painel')">
-<h3>Painel de Automação</h3>
-<p>Infraestrutura elétrica</p>
+<div class="cta">
+<p style="color:#aaa;">Quer instalar esse sistema na sua casa?</p>
+<button onclick="whats()">Agendar Consultoria</button>
 </div>
 
 </div>
+
+<!-- bottom navigation -->
+<div class="bottombar">
+<div class="btn">Home</div>
+<div class="btn">Ambientes</div>
+<div class="btn">Cenas</div>
+<div class="btn">Perfil</div>
 </div>
-
-<!-- CTA -->
-<div class="section">
-<h2>Projeto sob medida para sua casa</h2>
-<button class="btn" onclick="whats()">
-Solicitar consultoria
-</button>
-</div>
-
-<!-- POPUP -->
-<div id="popup">
-
-<h2 id="titulo"></h2>
-
-<iframe id="video"></iframe>
-
-<img id="imagem">
-
-<p id="descricao"></p>
-
-<button class="btn" onclick="whats()">Falar com especialista</button>
-
-<button onclick="fechar()" style="margin-top:20px;">Fechar</button>
-
-</div>
-
-<div id="overlayLuz"></div>
 
 <script>
 
-/* ESTADO DA CASA */
 let state = {
-    sala:false,
-    quarto:false,
-    cozinha:false,
-    cinema:false
+  sala:false,
+  quarto:false,
+  cozinha:false,
+  cinema:false
 };
 
-/* TOGGLE MAPA */
-function toggle(room){
+/* TOGGLE APP */
+function toggle(el,room){
 
-    state[room] = !state[room];
+  state[room] = !state[room];
 
-    const elementos = document.querySelectorAll(".casa");
-
-    elementos.forEach(el => {
-        if(el.innerText.toLowerCase().includes(room)){
-            el.classList.toggle("active");
-        }
-    });
+  if(state[room]){
+    el.classList.add("active");
+    document.getElementById(room).innerText = "ON";
+  }else{
+    el.classList.remove("active");
+    document.getElementById(room).innerText = "OFF";
+  }
 }
 
-/* POPUP */
-function abrir(tipo){
-
-    const titulo = document.getElementById("titulo");
-    const video = document.getElementById("video");
-    const imagem = document.getElementById("imagem");
-    const descricao = document.getElementById("descricao");
-    const overlay = document.getElementById("overlayLuz");
-
-    video.src = "";
-    overlay.style.opacity = "0.85";
-
-    if(tipo === "cinema"){
-        titulo.innerText = "Experiência Cinematográfica";
-        video.src = "https://www.youtube.com/embed/6v2L2UGZJAM";
-        imagem.src = "https://images.unsplash.com/photo-1587825140708-dfaf72ae4b04";
-        descricao.innerText = "Cinema residencial automatizado completo.";
-    }
-
-    if(tipo === "iluminacao"){
-        titulo.innerText = "Iluminação Inteligente";
-        video.src = "https://www.youtube.com/embed/2WcJQ1mU9zE";
-        imagem.src = "https://images.unsplash.com/photo-1507089947368-19c1da9775ae";
-        descricao.innerText = "Controle total de luz e cenários.";
-    }
-
-    if(tipo === "controle"){
-        titulo.innerText = "Controle Central";
-        video.src = "https://www.youtube.com/embed/ysz5S6PUM-U";
-        imagem.src = "https://images.unsplash.com/photo-1558002038-1055907df827";
-        descricao.innerText = "Toda a casa no seu celular.";
-    }
-
-    if(tipo === "painel"){
-        titulo.innerText = "Painel de Automação";
-        video.src = "https://www.youtube.com/embed/aqz-KE-bpKQ";
-        imagem.src = "https://images.unsplash.com/photo-1581090700227-1e37b190418e";
-        descricao.innerText = "Infraestrutura elétrica profissional.";
-    }
-
-    document.getElementById("popup").style.display = "flex";
-}
-
-/* FECHAR */
-function fechar(){
-    document.getElementById("popup").style.display = "none";
-    document.getElementById("video").src = "";
-    document.getElementById("overlayLuz").style.opacity = "0";
-}
-
-/* WHATSAPP */
+/* WHATSAPP FUNIL */
 function whats(){
-    const numero = "5511987251715";
 
-    const msg =
-`Olá, tenho interesse em uma consultoria Domus Prime.
+  const numero = "5511987251715";
 
-Quero um projeto de automação residencial personalizado.`;
+  const msg =
+`Olá Domus Prime,
 
-    window.open(`https://wa.me/${numero}?text=${encodeURIComponent(msg)}`, "_blank");
-}
+Tenho interesse em uma consultoria de automação residencial.
 
-/* SCROLL */
-function scrollToMap(){
-    document.getElementById("mapa").scrollIntoView({behavior:"smooth"});
+Ambientes:
+- Sala: ${state.sala}
+- Quarto: ${state.quarto}
+- Cozinha: ${state.cozinha}
+- Cinema: ${state.cinema}
+
+Quero instalar o sistema.`;
+
+  window.open(`https://wa.me/${numero}?text=${encodeURIComponent(msg)}`, "_blank");
 }
 
 </script>
