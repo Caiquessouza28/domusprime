@@ -3,105 +3,100 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Casa Inteligente Premium</title>
+<title>DOMUS PRIME | Smart Home</title>
 
 <style>
 body {
   margin:0;
   font-family: Arial;
-  background:#0f0f0f;
+  background:#0b0b0b;
   color:white;
 }
 
+/* HEADER */
 header {
-  background:url('https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?auto=format&fit=crop&w=1600&q=80');
-  background-size:cover;
-  background-position:center;
-  padding:110px 20px;
+  text-align:center;
+  padding:60px 20px;
+  background:#111;
+}
+
+h1 {
+  font-size:40px;
+  letter-spacing:2px;
+}
+
+.prime {
+  color:#00e676;
+}
+
+/* LAYOUT CASA */
+.house {
+  display:grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap:15px;
+  max-width:600px;
+  margin:30px auto;
+}
+
+.room {
+  background:#1a1a1a;
+  border-radius:12px;
+  padding:20px;
   text-align:center;
   position:relative;
+  transition:0.3s;
+  cursor:pointer;
 }
 
-header::after {
-  content:"";
+.room.active {
+  background:#00c85333;
+  box-shadow:0 0 20px #00c85355;
+}
+
+/* LUZ VISUAL */
+.light {
   position:absolute;
-  inset:0;
-  background:rgba(0,0,0,0.65);
+  top:10px;
+  right:10px;
+  width:15px;
+  height:15px;
+  border-radius:50%;
+  background:#444;
 }
 
-header h1, header p, header button {
-  position:relative;
-  z-index:1;
+.room.active .light {
+  background:#00e676;
+  box-shadow:0 0 10px #00e676;
 }
 
-h1 { font-size:42px; }
+/* SWITCH */
+.switch {
+  margin-top:10px;
+  padding:8px 14px;
+  border:none;
+  border-radius:8px;
+  cursor:pointer;
+  background:#333;
+  color:white;
+}
+
+.switch.on {
+  background:#00c853;
+}
+
+/* PAINEL */
+.panel {
+  text-align:center;
+  margin-top:20px;
+}
 
 .btn {
   background:#00c853;
-  padding:14px 22px;
-  color:white;
+  padding:12px 18px;
   border:none;
-  font-size:16px;
+  border-radius:10px;
+  color:white;
   cursor:pointer;
-  border-radius:8px;
-  margin-top:10px;
-}
-
-.btn:hover {
-  transform:scale(1.05);
-}
-
-section {
-  padding:50px 20px;
-  text-align:center;
-}
-
-.grid {
-  display:flex;
-  flex-wrap:wrap;
-  justify-content:center;
-  gap:20px;
-}
-
-.card {
-  background:#1c1c1c;
-  padding:20px;
-  border-radius:12px;
-  width:280px;
-}
-
-img {
-  width:100%;
-  height:180px;
-  object-fit:cover;
-  border-radius:10px;
-}
-
-iframe {
-  width:90%;
-  max-width:600px;
-  height:315px;
-  border-radius:10px;
-  margin-top:15px;
-}
-
-/* SIMULADOR */
-.sim {
-  background:#141414;
-  padding:20px;
-  border-radius:12px;
-  width:240px;
-  margin:10px;
-  display:inline-block;
-}
-
-/* FOOTER */
-footer {
-  text-align:center;
-  padding:30px;
-  background:#000;
-  color:#777;
-  font-size:14px;
 }
 </style>
 </head>
@@ -109,113 +104,106 @@ footer {
 <body>
 
 <header>
-<h1>Casa Inteligente Premium</h1>
-<p>Automação residencial moderna para conforto, segurança e tecnologia</p>
-
-<button class="btn" onclick="orcamento()">
-Solicitar Orçamento
-</button>
+<h1>DOMUS <span class="prime">PRIME</span></h1>
+<p>Painel inteligente estilo Smart Home</p>
 </header>
 
-<!-- SERVIÇOS -->
-<section>
-<h2>🔥 O que instalamos</h2>
+<!-- CASA (MAPA) -->
+<div class="house">
 
-<div class="grid">
-
-<div class="card">
-<img src="https://images.unsplash.com/photo-1507089947368-19c1da9775ae?auto=format&fit=crop&w=800&q=80">
-<h3>💡 Iluminação Inteligente</h3>
-<p>Cenas automáticas para cada ambiente</p>
+<div class="room" id="sala">
+<div class="light"></div>
+<h3>Sala</h3>
+<button class="switch" onclick="toggle('sala')">Luz</button>
 </div>
 
-<div class="card">
-<img src="https://images.unsplash.com/photo-1586023492125-27b2c045efd7?auto=format&fit=crop&w=800&q=80">
-<h3>🎬 Modo Cinema</h3>
-<p>Ambiente automático com luz e som</p>
+<div class="room" id="quarto">
+<div class="light"></div>
+<h3>Quarto</h3>
+<button class="switch" onclick="toggle('quarto')">Luz</button>
 </div>
 
-<div class="card">
-<img src="https://images.unsplash.com/photo-1558002038-1055907df827?auto=format&fit=crop&w=800&q=80">
-<h3>🏠 Casa Inteligente</h3>
-<p>Controle total pelo celular</p>
+<div class="room" id="cozinha">
+<div class="light"></div>
+<h3>Cozinha</h3>
+<button class="switch" onclick="toggle('cozinha')">Luz</button>
+</div>
+
+<div class="room" id="cinema">
+<div class="light"></div>
+<h3>Cinema</h3>
+<button class="switch" onclick="toggle('cinema')">Modo Cinema</button>
 </div>
 
 </div>
-</section>
 
-<!-- VÍDEOS -->
-<section>
-<h2>🎥 Veja na prática</h2>
+<!-- PAINEL -->
+<div class="panel">
+<h3>💰 Orçamento estimado</h3>
+<p id="valor">R$ 2000</p>
 
-<iframe src="https://www.youtube.com/embed/1Q8fG0TtVAY" allowfullscreen></iframe>
-<iframe src="https://www.youtube.com/embed/3v5G7G1xk8Q" allowfullscreen></iframe>
-</section>
+<button class="btn" onclick="calc()">Atualizar valor</button>
+<br><br>
 
-<!-- SIMULADOR SIMPLES -->
-<section>
-<h2>🏠 Simule sua casa inteligente</h2>
-
-<div class="sim">
-<h3>💡 Luzes</h3>
-<p id="luz">OFF</p>
-<button class="btn" onclick="toggle()">Alternar</button>
+<button class="btn" onclick="whats()">📲 Enviar projeto</button>
 </div>
-
-<div class="sim">
-<h3>🎬 Cinema</h3>
-<p id="cinema">OFF</p>
-<button class="btn" onclick="cinema()">Ativar</button>
-</div>
-
-<div class="sim">
-<h3>❄️ Clima</h3>
-<p id="temp">24°C</p>
-<button class="btn" onclick="temp()">Ajustar</button>
-</div>
-</section>
-
-<!-- CONTATO -->
-<section>
-<h2>📞 Fale com a gente</h2>
-<p>Projetos sob medida para sua residência</p>
-
-<button class="btn" onclick="orcamento()">
-Quero automatizar minha casa
-</button>
-</section>
-
-<footer>
-Casa Inteligente Premium © 2026 — Automação Residencial
-</footer>
 
 <script>
-let luz = false;
-let cinemaAtivo = false;
-let temp = 24;
 
-function toggle(){
-  luz = !luz;
-  document.getElementById("luz").innerText = luz ? "ON 💡" : "OFF";
+let state = {
+  sala:false,
+  quarto:false,
+  cozinha:false,
+  cinema:false
+};
+
+function toggle(room){
+  state[room] = !state[room];
+
+  const el = document.getElementById(room);
+  const btn = el.querySelector("button");
+
+  if(state[room]){
+    el.classList.add("active");
+    btn.classList.add("on");
+  } else {
+    el.classList.remove("active");
+    btn.classList.remove("on");
+  }
+
+  calc();
 }
 
-function cinema(){
-  cinemaAtivo = true;
-  luz = false;
-  document.getElementById("cinema").innerText = "ON 🎬";
-  document.getElementById("luz").innerText = "Cinema ativo";
+function calc(){
+  let base = 2000;
+
+  if(state.sala) base += 1000;
+  if(state.quarto) base += 800;
+  if(state.cozinha) base += 900;
+  if(state.cinema) base += 3000;
+
+  document.getElementById("valor").innerText = "R$ " + base;
 }
 
-function temp(){
-  temp--;
-  document.getElementById("temp").innerText = temp + "°C";
-}
-
-function orcamento(){
+function whats(){
   const numero = "SEU_NUMERO";
-  const msg = "Olá! Quero um orçamento de automação residencial da Casa Inteligente Premium.";
+
+  const msg =
+`Projeto DOMUS PRIME:
+
+Status da casa:
+- Sala: ${state.sala}
+- Quarto: ${state.quarto}
+- Cozinha: ${state.cozinha}
+- Cinema: ${state.cinema}
+
+Valor estimado: ${document.getElementById("valor").innerText}
+
+Quero esse sistema instalado.`;
+
   window.open(`https://wa.me/${numero}?text=${encodeURIComponent(msg)}`, "_blank");
 }
+
 </script>
 
 </body>
